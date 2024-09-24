@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Inventory Management</title>
+    <link rel="stylesheet" href="./styles/inventoryTabStyles.css">
+</head>
+<body>
+    <div class="admin-panel">
+        <div id="sidebar" class="sidebar">
+        </div>
+        <div class="main-content">
+            <button id="menuBtn" class="menu-btn">☰</button>
+            <h2>Inventory Management</h2>
+            <button id="addBookBtn" class="add-book-btn">Add Book</button>
+            <div class="table-container">
+                <table id="bookTable">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>ISBN</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookList"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="addBookModal" class="modal">
+        <div class="modal-content">
+            <h2>Add New Book</h2>
+            <form action="../api/routes/book.route.php" method="post" id="addBookForm" onsubmit="return validateForm()">
+                <label for="title">Title:</label>
+                <input name="title" type="text" id="title" required maxlength="255" pattern=".{1,255}" title="Title must be between 1 and 255 characters long.">
+        
+                <label for="author">Author:</label>
+                <input name="author" type="text" id="author" required maxlength="100" pattern=".{1,100}" title="Author name must be between 1 and 100 characters long.">
+        
+                <label for="description">Description:</label>
+                <textarea name="description" id="description" required maxlength="500" pattern=".{1,500}" title="Description must be between 1 and 500 characters long."></textarea>
+        
+                <label for="imageUrl">Image URL:</label>
+                <input name="imageUrl" type="url" id="imageUrl" required placeholder="https://example.com/image.jpg" title="Please enter a valid URL.">
+        
+                <label for="price">Price:</label>
+                <input name="price" type="number" id="price" required min="0.01" step="0.01" title="Price must be a positive number.">
+        
+                <label for="stock">Stock:</label>
+                <input name="stock" type="number" id="stock" required min="0" title="Stock cannot be negative.">
+        
+                <button type="submit">Add Book</button>
+                <button type="button" id="closeModal">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="./app/inventory.js"></script>
+    <script src="./app/sidebar.js"></script>
+</body>
+</html>
