@@ -1,0 +1,55 @@
+header{
+    display: flex;
+    flex-direction: row;
+    height: 200px;
+    justify-content: space-between;
+}
+.account{
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 50px;
+    align-items: center;
+}
+.imotes{
+    width: 50px;
+    height: 40px;
+}
+.profile{
+    width: 80px;
+    height: 80px;
+}
+.logo{
+    width:100px;
+}
+nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 90px;
+
+}
+nav ul{
+    background-color: rgb(69, 118, 175);
+    border-bottom-left-radius: 13px;
+    border-bottom-right-radius: 13px;
+    padding: 20px;
+    width: 100%;
+    max-width: 1280px;
+    display: flex;
+    justify-content: space-evenly;
+
+}
+nav li{
+    display: inline;
+    color: rgb(252, 251, 251);
+    font-family: 'Roboto';
+    padding: 5px 45px 2px;
+    font-size: 16px;
+    height: 100px;
+    text-decoration: none;
+}
+nav li:hover{
+    cursor: pointer;
+}

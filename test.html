@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+</head>
+<body>
+    <div id="book-info"></div>
+    <div id="reviews"></div>
+    <div id="rating-counts"></div>
+
+    <script>
+        // Function to fetch book information
+        async function fetchBookInfo(bookId) {
+            try {
+                const response = await fetch(`./api/routes/book.route.php?book_id=${bookId}`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.text();
+                console.log(data);
+                
+                displayBookInfo(data);
+            } catch (error) {
+                console.error('Error fetching book information:', error);
+            }
+        }
+
+        // Function to display book information on the webpage
+        function displayBookInfo(data) {
+            const bookInfoDiv = document.getElementById('book-info');
+            const reviewsDiv = document.getElementById('reviews');
+            const ratingCountsDiv = document.getElementById('rating-counts');
+
+            // Display book details
+            const bookDetails = data.book;
+            bookInfoDiv.innerHTML = `
+                <h2>${bookDetails.title}</h2>
+                <img src="${bookDetails.imageUrl}" alt="${bookDetails.title}" />
+                <p>${bookDetails.book_description}</p>
+                <p>Author: ${bookDetails.author}</p>
+                <p>Price: Rs ${bookDetails.hardcopy_price} (E-book: Rs ${bookDetails.ebook_price})</p>
+                <p>Status: ${bookDetails.stock_status}</p>
+                <p>Average Rating: ${bookDetails.avg_rating}</p>
+                <p>Total Reviews: ${bookDetails.total_reviews}</p>
+            `;
+
+            // Display reviews
+            reviewsDiv.innerHTML = `<h3>Reviews:</h3>`;
+            data.reviews.forEach(review => {
+                reviewsDiv.innerHTML += `
+                    <div>
+                        <strong>${review.username}</strong> (Rating: ${review.review_rating})
+                        <p>${review.review_description}</p>
+                        <small>${new Date(review.review_date).toLocaleDateString()}</small>
+                    </div>
+                `;
+            });
+
+            // Display rating counts
+            ratingCountsDiv.innerHTML = `<h3>Rating Counts:</h3>`;
+            ratingCountsDiv.innerHTML += `
+                <p>1 Star: ${data.ratingCounts.rating_1_count}</p>
+                <p>2 Stars: ${data.ratingCounts.rating_2_count}</p>
+                <p>3 Stars: ${data.ratingCounts.rating_3_count}</p>
+                <p>4 Stars: ${data.ratingCounts.rating_4_count}</p>
+                <p>5 Stars: ${data.ratingCounts.rating_5_count}</p>
+            `;
+        }
+
+        // Call the fetch function with the desired book ID
+        const bookId = 1; // Replace with the actual book ID
+        fetchBookInfo(bookId);
+    </script>
+</body>
+</html>

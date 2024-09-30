@@ -18,10 +18,12 @@
                 <table id="bookTable">
                     <thead>
                         <tr>
+                            <th>Id</th>
                             <th>Title</th>
                             <th>Author</th>
-                            <th>ISBN</th>
-                            <th>Quantity</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Stock</th>
                         </tr>
                     </thead>
                     <tbody id="bookList"></tbody>
@@ -34,6 +36,7 @@
         <div class="modal-content">
             <h2>Add New Book</h2>
             <form action="../api/routes/book.route.php" method="post" id="addBookForm" onsubmit="return validateForm()">
+                <input type="hidden" name="action" value="create"> 
                 <label for="title">Title:</label>
                 <input name="title" type="text" id="title" required maxlength="255" pattern=".{1,255}" title="Title must be between 1 and 255 characters long.">
         

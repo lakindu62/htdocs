@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Edit Book</title>
+        <link rel="stylesheet" href="./styles/inventoryTabStyles.css" />
+        <link rel="stylesheet" href="./styles/utils.css" />
+    </head>
+    <body>
+        <div class="admin-panel">
+            <div id="sidebar" class="sidebar">
+                <!-- Sidebar content -->
+            </div>
+            <div class="main-content">
+                <button id="menuBtn" class="menu-btn">☰</button>
+                <h2>Edit Book</h2>
+                <form id="editBookForm">
+                    <input type="hidden" id="bookId" name="bookId" />
+
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" required />
+
+                    <label for="author">Author:</label>
+                    <input type="text" id="author" name="author" required />
+
+                    <label for="description">Description:</label>
+                    <textarea
+                        id="description"
+                        name="description"
+                        required
+                    ></textarea>
+
+                    <label for="imageUrl">Image URL:</label>
+                    <input type="url" id="imageUrl" name="imageUrl" required />
+
+                    <label for="price">Price:</label>
+                    <input
+                        type="number"
+                        id="price"
+                        name="price"
+                        step="0.01"
+                        required
+                    />
+
+                    <label for="stock">Stock:</label>
+                    <input type="number" id="stock" name="stock" required />
+
+                    <label for="categories">Categories:</label>
+                    <div id="category-container" class="category-container">
+                        <!-- Categories will be populated dynamically -->
+                    </div>
+                    <div class="">
+                        <select  id="category" name="category"></select>
+                        <button class="btn">Add</button>
+                    </div>
+                    <!-- <button type="button" id="addCategoryBtn">Add New Category</button> -->
+
+                    <button type="submit">Save Changes</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="addCategoryModal" class="modal">
+            <div class="modal-content">
+                <h3>Add New Category</h3>
+                <input
+                    type="text"
+                    id="newCategoryName"
+                    placeholder="Enter category name"
+                />
+                <button id="saveNewCategory">Save</button>
+                <button id="cancelNewCategory">Cancel</button>
+            </div>
+        </div>
+
+        <script src="./app/editBook.js"></script>
+        <script src="./app/sidebar.js"></script>
+    </body>
+</html>

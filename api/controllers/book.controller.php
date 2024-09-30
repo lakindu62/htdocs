@@ -2,22 +2,22 @@
 
 
 // Controller: bookController.php
-
-
-
-
 require_once '../models/book.model.php'; // Include the model
 
-function getAdminDashboardBookData()
+
+
+
+function getAdminDashboardBooksData()
 {
     $books = getBooks();
-
     $html = '';
     foreach ($books as $book) {
-        $html .= "<tr>
+        $html .= "<tr data-book_id=\"{$book['book_id']}\">
+        <td>{$book['book_id']}</td>
                     <td>{$book['title']}</td>
                     <td>{$book['author']}</td>
                     <td>{$book['description']}</td>
+                    <td>{$book['price']}</td>
                     <td>{$book['stock']}</td>
                   </tr>";
     }
@@ -25,32 +25,51 @@ function getAdminDashboardBookData()
 };
 
 
-
-function getBookCategoryHtml()
+function getAdminSingleBookDataController($book_id)
 {
-    // Get the books organized by category from the model
-    $booksByCategory = getAllBooksWithCategories();
+    $bookData = getAdminSingleBookData($book_id);
 
-    // Generate partial HTML for the books
-    ob_start(); // Start output buffering
+    if ($bookData) {
+        if (!empty($bookData["categories"])) {
 
-    foreach ($booksByCategory as $category => $books) {
-        echo "<div class='category-section'>";
-        echo "<h2 class='category-title'>" . htmlspecialchars($category) . "</h2>";
-        echo "<ul class='book-list'>";
-        foreach ($books as $book) {
-            echo "<li class='book-item'>";
-            echo "<img src='" . htmlspecialchars($book['imageUrl']) . "' alt='" . htmlspecialchars($book['title']) . "' style='width: 50px;'>";
-            echo "<strong>" . htmlspecialchars($book['title']) . "</strong> by " . htmlspecialchars($book['author']) . " - $" . htmlspecialchars($book['price']);
-            echo "</li>";
+            $bookData["categories"] = explode(',',    $bookData["categories"]);
+        } else {
+            $bookData["categories"] = [];
         }
-        echo "</ul>";
-        echo "</div>";
+        return json_encode($bookData);
+    } else {
+        return json_encode(['Error' => "No book found"]);
     }
 
-    $htmlContent = ob_get_clean(); // Get the buffered output
 
-    return  $htmlContent;
+    $json_data = json_encode($bookData);
+    return $json_data;
+}
+
+
+function getBookDetailsController($book_id)
+{
+    $reviews = getReviews( $book_id);
+    $ratingCounts = getRatingCounts( $book_id);
+    $bookDetails = getBookDetails( $book_id);
+    
+    // Prepare the response data
+    $response = [
+        'book' => $bookDetails,
+        'reviews' => $reviews,
+        'ratingCounts' => $ratingCounts
+    ];
+    
+    return json_encode($response);
+}
+
+
+
+function getBooksByCategory()
+{
+    $booksByCategory = getAllBooksWithCategories(); 
+    header('Content-Type: application/json'); 
+    return json_encode($booksByCategory); //  JSON encoded data
 }
 
 
@@ -78,7 +97,7 @@ function createBookController()
 
 
 
-   
+
 
     createBook(
         $title,
@@ -88,4 +107,29 @@ function createBookController()
         $imageUrl,
         $price
     );
+}
+
+
+
+function updateBookController($data)
+{
+    $book_id = $data['book_id'];
+    $title = $data['title'];
+    $author = $data['author'];
+    $description = $data['description'];
+    $imageUrl = $data['imageUrl'];
+    $price = $data['price'];
+    $stock = $data['stock'];
+    $categories = $data['categories']; // This should be an array of category IDs
+
+    // Update the book details
+    $updateBookResponse = updateBook($book_id, $title, $author, $description, $imageUrl, $price, $stock);
+
+    if ($updateBookResponse) {
+        // Update the book categories
+        updateBookCategories($book_id, $categories);
+        return json_encode(["success" => true, "message" => "Book updated successfully."]);
+    } else {
+        return json_encode(["success" => false, "message" => "Error updating book."]);
+    }
 }

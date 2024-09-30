@@ -1,22 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Book List</title>
-    </head>
-    <body>
-        <h1>Book List</h1>
-        <ul id="bookList"></ul>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookstore</title>
+    <link rel="stylesheet" href="../styles/common.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/footer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
 
-        <script>
-            fetch("./api/routes/book.route.php")
-                .then((response) => response.text())
-                .then((books) => {
-                    const bookList = document.getElementById("bookList");
-                    bookList.innerHTML = books;
-                })
-                .catch((error) => console.error("Error:", error));
-        </script>
-    </body>
+    <div id="header-container"></div>
+
+    
+    <section class="hero">
+        <article><img class="darker" src="./images/article1.png"></article>
+        <section class="sub-hero">
+            <article><img class="darker" src="./images/article2.png"></article>
+            <article><img class="darker" src="./images/article3.png"></article>
+        </section>
+    </section>
+    <h2 class="header1">BESTSELLERS</h2>
+    <section class="bestsellers" id="bestsellers"></section>
+
+    <h2 class="header1 header2">NEW ARRIVALS</h2>
+    <section class="bestsellers" id="new-arrivals"></section>
+
+    <footer id="footer-container"></footer>
+    <script src="./app/common.js"></script>
+    <script src="./app/index.js"></script>
+</body>
 </html>

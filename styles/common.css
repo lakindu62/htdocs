@@ -1,0 +1,178 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+}
+
+.logo img {
+    max-width: 100px;
+}
+
+.account {
+    display: flex;
+    align-items: center;
+}
+
+.account img {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+}
+
+/* Navigation styles */
+nav {
+    background-color: rgb(69, 118, 175);
+    border-radius: 8px 8px 20px 20px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav li {
+    padding: 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+
+/* Hamburger menu styles */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger span {
+    height: 3px;
+    width: 25px;
+    background-color: black;
+    margin-bottom: 5px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .account, nav {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        right: -250px;
+        width: 250px;
+        height: 100%;
+        background-color: rgb(69, 118, 175);
+        transition: 0.3s;
+        z-index: 1000;
+    }
+
+    .sidebar.active {
+        right: 0;
+    }
+
+    .sidebar ul {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .sidebar li {
+        margin-bottom: 15px;
+    }
+
+  
+}
+
+ /* Hamburger menu styles */
+ .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger span {
+    height: 3px;
+    width: 25px;
+    background-color: black;
+    margin-bottom: 5px;
+}
+
+/* Sidebar styles */
+.sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: rgb(69, 118, 175);
+    transition: 0.3s;
+    z-index: 1000;
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 20px;
+}
+
+.sidebar li {
+    margin-bottom: 15px;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    header {
+        flex-wrap: wrap;
+    }
+
+    .account, nav {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .sidebar {
+        display: block;
+    }
+
+    footer {
+        flex-direction: column;
+    }
+
+    .one, .two, .three {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
