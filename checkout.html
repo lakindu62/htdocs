@@ -3,156 +3,142 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Checkout Details</title>
-        <link rel="stylesheet" href="./styles/checkoutdetails.css" />
-        <link rel="stylesheet" href="./styles/common.css" />
-        <link rel="stylesheet" href="./styles/footer.css" />
+        <title>Checkout - Bookstore</title>
+        <link rel="stylesheet" href="../styles/common.css" />
+        <link rel="stylesheet" href="../styles/checkout.css" />
+        <link rel="stylesheet" href="../styles/footer.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
             href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
             rel="stylesheet"
         />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
     </head>
     <body>
         <div id="header-container"></div>
 
-        <div class="progress-bar" id="progress-bar-container"></div>
 
-        <form action="" method="post">
-            <fieldset>
-                <legend id="bdetails">Billing Details</legend>
+        <div class="container">
+            <div class="checkout-form">
+                <form id="checkoutForm">
+                    <h2>Shipping Details</h2>
+                    <label for="country">Country:</label>
+                    <input type="text" id="country" name="country" required />
 
-                <div style="display: inline; float: right">
-                    <label for="pnumber">Phone Number</label>
-                    <br />
-                    <input
-                        type="tel"
-                        id="pnumber"
-                        name="pnumber"
-                        class="field"
-                        required
-                    />
-                    <br /><br />
-                    <label for="lastname">Last Name</label>
-                    <br />
+                    <label for="city">City:</label>
+                    <input type="text" id="city" name="city" required />
+
+                    <label for="postal_address">Postal Address:</label>
                     <input
                         type="text"
-                        id="lastname"
-                        name="lastname"
-                        class="field"
-                    />
-                    <br /><br />
-                    <label for="town">Town/City</label>
-                    <br />
-                    <input type="text" id="town" name="town" class="field" />
-                    <br /><br />
-                    <label type="postalcode">Postal Code</label>
-                    <br />
-                    <input
-                        type="text"
-                        id="postalcode"
-                        name="postalcode"
-                        class="field"
+                        id="postal_address"
+                        name="postal_address"
                         required
                     />
-                    <br /><br />
+
+                    <label for="postal_code">Postal Code:</label>
+                    <input
+                        type="text"
+                        id="postal_code"
+                        name="postal_code"
+                        required
+                    />
+
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" required />
+
+                    <h2>Payment Method</h2>
+                    <div class="payment-options">
+                        <div class="payment-option">
+                            <input
+                                type="radio"
+                                id="cash"
+                                name="payment"
+                                value="cash"
+                                checked
+                            />
+                            <label for="cash">Cash on Delivery</label>
+                        </div>
+                        <div class="payment-option">
+                            <input
+                                type="radio"
+                                id="card"
+                                name="payment"
+                                value="card"
+                            />
+                            <label for="card">Pay with Card</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="order-summary">
+                <h2>Order Summary</h2>
+                <div class="order-total">Total Amount</div>
+                <div class="order-amount">$59.97</div>
+                <div
+                    id="securePayment"
+                    class="secure-payment"
+                    style="display: none"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <rect
+                            x="3"
+                            y="11"
+                            width="18"
+                            height="11"
+                            rx="2"
+                            ry="2"
+                        ></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    Secure Payment
                 </div>
-                <div>
-                    <label for="email">Email-Address</label>
-                    <br />
-                    <input
-                        type="email"
-                        id="email"
-                        name="Email-Address"
-                        class="field"
-                        required
-                    />
-                    <br /><br />
-                    <label for="firstname">First Name</label>
-                    <br />
-                    <input
-                        type="text"
-                        id="firstname"
-                        name="firstname"
-                        class="field"
-                    />
-                    <br /><br />
-                    <label for="postaladdress">Postal Address</label>
-                    <br />
-                    <input
-                        type="text"
-                        id="postaladdress"
-                        name="postaladdress"
-                        class="field"
-                    />
-                    <br /><br />
-                    <label>Select Payment Method</label>
-                    <br />
-                    <select class="field">
-                        <option>Cash on Delivery</option>
-                        <option>Card Payment</option>
-                    </select>
+                <div class="order-details-container">
+                    <div class="order-item">
+                        <span>Book Title 1</span>
+                        <span>$19.99</span>
+                    </div>
+                    <div class="order-item">
+                        <span>Book Title 2</span>
+                        <span>$24.99</span>
+                    </div>
+                    <div class="order-item">
+                        <span>Book Title 3</span>
+                        <span>$14.99</span>
+                    </div>
+                    <div class="order-item">
+                        <span>Shipping</span>
+                        <span>$5.00</span>
+                    </div>
+                    <div class="total">Total: $64.97</div>
                 </div>
-
-                <section>
-                    <fieldset class="cdetails">
-                        <legend id="cpayment">Card Payment</legend>
-                        <label for="chname">Card Holder Name</label>
-                        <br />
-                        <input
-                            type="text"
-                            id="chname"
-                            name="chname"
-                            class="card"
-                            required
-                        />
-                        <br /><br />
-                        <label for="cardnumber">Card Number</label>
-                        <br />
-                        <input
-                            type="number"
-                            id="cardnumber"
-                            name="cardnumber"
-                            class="card"
-                            required
-                        />
-                        <br /><br />
-                        <label for="cvv">CVV</label>
-                        <br />
-                        <input type="text" id="cvv" name="cvv" class="card" />
-                        <br /><br />
-                        <input type="radio" id="creditcard" name="coption" />
-                        <label for="credicard">Credit Card</label>
-                        <br />
-                        <input type="radio" id="debitcard" name="coption" />
-                        <label for="debitcard">Debit Card</label>
-                    </fieldset>
-
-                    <table border="1">
-                        <tr>
-                            <th colspan="2">Order Summary</th>
-                        </tr>
-                        <tr>
-                            <td>Sub-Total(Rs.)</td>
-                            <td>11,600.00</td>
-                        </tr>
-                        <tr>
-                            <td>Shipping(Rs.)</td>
-                            <td>600.00</td>
-                        </tr>
-                        <tr>
-                            <td>TOTAL</td>
-                            <td>12,200.00</td>
-                        </tr>
-                    </table>
-                </section>
-
-                <button id="button">PROCEED TO CHECKOUT</button>
-            </fieldset>
-        </form>
+                <button class="make-payment" type="submit" form="checkoutForm">
+                    Make Payment
+                </button>
+            </div>
+        </div>
 
         <footer id="footer-container"></footer>
+
         <script src="./app/common.js"></script>
+        <script src="./app/checkout.js"></script>
+        <script
+            src="https://kit.fontawesome.com/693bfee935.js"
+            crossorigin="anonymous"
+        ></script>
     </body>
 </html>

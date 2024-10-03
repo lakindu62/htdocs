@@ -19,8 +19,9 @@ switch ($requestMethod) {
         }
 
         if ($isAdmin) {
-            $html = getAdminDashboardBooksData();
-            echo $html;
+            $json = getAdminDashboardBooksData();
+            header('Content-Type: application/json');
+            echo $json;
             break;
         }
         //get details of a single book for the admin

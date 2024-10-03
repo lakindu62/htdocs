@@ -1,62 +1,13 @@
 * {
     box-sizing: border-box;
 }
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
+
 
 .admin-panel {
     display: flex;
-    height: 100vh;
+    width: 100%;
 }
 
-.sidebar {
-    width: 250px;
-    background-color: #f0f0f0;
-    padding: 20px;
-    transition: transform 0.3s ease-in-out;
-}
-
-.sidebar h1 {
-    margin-bottom: 20px;
-}
-
-.sidebar ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.sidebar li {
-    margin-bottom: 10px;
-}
-
-.sidebar a {
-    text-decoration: none;
-    color: #333;
-}
-
-.sidebar a.active {
-    font-weight: bold;
-}
-
-.main-content {
-    flex-grow: 1;
-    padding: 20px;
-    overflow-x: auto;
-}
-
-.menu-btn {
-    display: none;
-    background-color: #333;
-    color: white;
-    border: none;
-    padding: 10px;
-    font-size: 20px;
-    cursor: pointer;
-    margin-bottom: 10px;
-}
 
 .add-book-btn {
     background-color: #4caf50;
@@ -104,7 +55,7 @@ th {
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 90%;
     max-width: 500px;
 }
 
@@ -119,7 +70,8 @@ input {
 }
 
 input {
-    padding: 5px;
+    padding: 10px;
+    font-size: 16px;
 }
 
 button {
@@ -128,36 +80,11 @@ button {
     color: white;
     border: none;
     cursor: pointer;
+    font-size: 16px;
 }
 
 button[type="button"] {
     background-color: #f44336;
-}
-
-@media screen and (max-width: 768px) {
-    .admin-panel {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        position: fixed;
-        left: -250px;
-        top: 0;
-        bottom: 0;
-        z-index: 1;
-    }
-
-    .sidebar.show {
-        transform: translateX(250px);
-    }
-
-    .main-content {
-        width: 100%;
-    }
-
-    .menu-btn {
-        display: block;
-    }
 }
 
 /* Book-Edit-Page */
@@ -172,19 +99,22 @@ button[type="button"] {
     display: flex;
     gap: 10px;
     margin-bottom: 10px;
-    align-content: center;
+    align-items: center;
 }
+
 .category-form-input .btn {
     width: 50px;
 }
+
 .category-pill {
+    position: relative;
     background-color: #f0f0f0;
     border-radius: 20px;
     padding: 5px 15px;
     display: inline-flex;
     align-items: center;
-    position: relative;
 }
+
 .delete-icon {
     display: none;
     position: absolute;
@@ -193,13 +123,103 @@ button[type="button"] {
     background-color: red;
     color: white;
     border-radius: 50%;
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
     text-align: center;
-    line-height: 15px;
-    font-size: 10px;
+    line-height: 20px;
+    font-size: 14px;
     cursor: pointer;
 }
+
 .category-pill:hover .delete-icon {
     display: block;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .admin-panel {
+        flex-direction: column;
+    }
+
+    .main-content {
+        width: 100%;
+        padding: 10px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 6px;
+    }
+
+    .add-book-btn {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+
+    input, button {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .category-form-input {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .category-form-input .btn {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .category-pill {
+        font-size: 14px;
+        padding: 4px 12px;
+    }
+
+    .delete-icon {
+        width: 18px;
+        height: 18px;
+        line-height: 18px;
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 4px;
+    }
+
+    .modal-content {
+        width: 98%;
+        margin: 5% auto;
+    }
+
+    input, button {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .category-pill {
+        font-size: 12px;
+        padding: 3px 10px;
+    }
+
+    .delete-icon {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        font-size: 10px;
+    }
 }

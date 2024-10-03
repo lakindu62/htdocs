@@ -1,0 +1,353 @@
+--Below is the SQL code for the database schema: for this project
+
+-- Create Users table
+CREATE TABLE Users (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+-- Create Categories table
+CREATE TABLE Categories (
+    category_id INT PRIMARY KEY AUTO_INCREMENT,
+    category_name VARCHAR(50) NOT NULL UNIQUE
+);
+
+-- Create Books table
+CREATE TABLE Books (
+    book_id INT PRIMARY KEY AUTO_INCREMENT,
+    description TEXT,
+    imageUrl VARCHAR(255),
+    title VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    stock INT NOT NULL,
+    author VARCHAR(100) NOT NULL
+);
+
+-- Create Book_Categories table
+CREATE TABLE Book_Categories (
+    category_id INT,
+    book_id INT,
+    PRIMARY KEY (category_id, book_id),
+    FOREIGN KEY (category_id) REFERENCES Categories(category_id),
+    FOREIGN KEY (book_id) REFERENCES Books(book_id)
+);
+
+-- Create Reviews table
+CREATE TABLE Reviews (
+    review_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    book_id INT,
+    description TEXT,
+    rating INT,
+    review_date DATE,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (book_id) REFERENCES Books(book_id)
+);
+
+-- Create Shopping_Carts table
+CREATE TABLE Shopping_Carts (
+    cart_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
+
+-- Create Cart_Items table
+CREATE TABLE Cart_Items (
+    cart_id INT,
+    book_id INT,
+    quantity INT NOT NULL,
+    PRIMARY KEY (cart_id, book_id),
+    FOREIGN KEY (cart_id) REFERENCES Shopping_Carts(cart_id),
+    FOREIGN KEY (book_id) REFERENCES Books(book_id)
+);
+
+-- Create Wishlist table
+CREATE TABLE Wishlist (
+    wishlist_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
+
+-- Create Wishlist_Items table
+CREATE TABLE Wishlist_Items (
+    book_id INT,
+    wishlist_id INT,
+    PRIMARY KEY (book_id, wishlist_id),
+    FOREIGN KEY (book_id) REFERENCES Books(book_id),
+    FOREIGN KEY (wishlist_id) REFERENCES Wishlist(wishlist_id)
+);
+
+-- Create Shipping_Details table
+CREATE TABLE Shipping_Details (
+    shipping_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    country VARCHAR(50) NOT NULL,
+    city VARCHAR(50) NOT NULL,
+    postal_address VARCHAR(255) NOT NULL,
+    postal_code VARCHAR(20) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
+
+-- Create Orders table
+CREATE TABLE Orders (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    shipping_id INT,
+    payment_method VARCHAR(50) NOT NULL,
+    order_status VARCHAR(50) NOT NULL,
+    order_date DATE NOT NULL,
+    shipping_cost DECIMAL(10, 2) NOT NULL,
+    total_amount DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (shipping_id) REFERENCES Shipping_Details(shipping_id)
+);
+
+-- Create Order_Items table
+CREATE TABLE Order_Items (
+    order_id INT,
+    book_id INT,
+    quantity INT NOT NULL,
+    PRIMARY KEY (order_id, book_id),
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id),
+    FOREIGN KEY (book_id) REFERENCES Books(book_id)
+);
+
+
+---The YAML FILE below is Folder Structure of my project. use this to give accurate answers when importing files
+
+planChat
+  - path: /index.html
+    type: file
+  - path: /app
+    type: directory
+    contents:
+    - path: /app/orderSummary.js
+      type: file
+    - path: /app/cart.js
+      type: file
+    - path: /app/index.js
+      type: file
+    - path: /app/book-details.js
+      type: file
+    - path: /app/profile
+      type: directory
+      contents:
+      - path: /app/profile/profile.js
+        type: file
+      - path: /app/profile/wishlist.js
+        type: file
+      - path: /app/profile/profile-common.js
+        type: file
+    - path: /app/common.js
+      type: file
+    - path: /app/my-profile.js
+      type: file
+    - path: /app/checkout.js
+      type: file
+  - path: /auth
+    type: directory
+    contents:
+    - path: /auth/auth.js
+      type: file
+    - path: /auth/sign-In.html
+      type: file
+    - path: /auth/sign-up.html
+      type: file
+    - path: /auth/signIn.css
+      type: file
+    - path: /auth/signUp.css
+      type: file
+  - path: /images
+    type: directory
+    contents:
+    - path: /images/Cart.png
+      type: file
+    - path: /images/three.png
+      type: file
+    - path: /images/book3.png
+      type: file
+    - path: /images/book2.png
+      type: file
+    - path: /images/Vector.png
+      type: file
+    - path: /images/book1.png
+      type: file
+    - path: /images/book5.png
+      type: file
+    - path: /images/two.png
+      type: file
+    - path: /images/arrow.png
+      type: file
+    - path: /images/Black and Blue Modern Fantasy Dragon Novel Book Cover 1.png
+      type: file
+    - path: /images/book4.png
+      type: file
+    - path: /images/book6.png
+      type: file
+    - path: /images/Group 2 (1).png
+      type: file
+    - path: /images/book7.png
+      type: file
+    - path: /images/Search.png
+      type: file
+    - path: /images/book9.png
+      type: file
+    - path: /images/logo.png
+      type: file
+    - path: /images/book8.png
+      type: file
+    - path: /images/notifications.png
+      type: file
+    - path: /images/one.png
+      type: file
+    - path: /images/article1.png
+      type: file
+    - path: /images/article3.png
+      type: file
+    - path: /images/article2.png
+      type: file
+    - path: /images/Black and Blue Dystopian Sci-Fi Novel Book Cover 3.png
+      type: file
+    - path: /images/Brown Rusty Mystery Novel Book Cover 3.png
+      type: file
+    - path: /images/Google.png
+      type: file
+  - path: /books.html
+    type: file
+  - path: /admin
+    type: directory
+    contents:
+    - path: /admin/app
+      type: directory
+      contents:
+      - path: /admin/app/sidebar.js
+        type: file
+      - path: /admin/app/editBook.js
+        type: file
+      - path: /admin/app/inventory.js
+        type: file
+    - path: /admin/edit-book.html
+      type: file
+    - path: /admin/styles
+      type: directory
+      contents:
+      - path: /admin/styles/inventoryTabStyles.css
+        type: file
+      - path: /admin/styles/utils.css
+        type: file
+      - path: /admin/styles/common.css
+        type: file
+    - path: /admin/manage-inventory.html
+      type: file
+  - path: /book-details.html
+    type: file
+  - path: /styles
+    type: directory
+    contents:
+    - path: /styles/books.css
+      type: file
+    - path: /styles/my-profile.css
+      type: file
+    - path: /styles/checkout.css
+      type: file
+    - path: /styles/wishList.css
+      type: file
+    - path: /styles/index.css
+      type: file
+    - path: /styles/suggest.css
+      type: file
+    - path: /styles/utils.css
+      type: file
+    - path: /styles/common.css
+      type: file
+    - path: /styles/about-us.css
+      type: file
+    - path: /styles/purchases.css
+      type: file
+    - path: /styles/mycart.css
+      type: file
+    - path: /styles/header.css
+      type: file
+    - path: /styles/ordersummary.css
+      type: file
+    - path: /styles/footer.css
+      type: file
+    - path: /styles/book-details.css
+      type: file
+  - path: /test.html
+    type: file
+  - path: /checkout.html
+    type: file
+  - path: /suggest.html
+    type: file
+  - path: /mycart.html
+    type: file
+  - path: /api
+    type: directory
+    contents:
+    - path: /api/models
+      type: directory
+      contents:
+      - path: /api/models/category.model.php
+        type: file
+      - path: /api/models/auth.model.php
+        type: file
+      - path: /api/models/book.model.php
+        type: file
+      - path: /api/models/wishlist.model.php
+        type: file
+      - path: /api/models/cart.model.php
+        type: file
+      - path: /api/models/order.model.php
+        type: file
+    - path: /api/config.php
+      type: file
+    - path: /api/controllers
+      type: directory
+      contents:
+      - path: /api/controllers/order.controller.php
+        type: file
+      - path: /api/controllers/cart.controller.php
+        type: file
+      - path: /api/controllers/book.controller.php
+        type: file
+      - path: /api/controllers/category.controller.php
+        type: file
+      - path: /api/controllers/auth.controller.php
+        type: file
+      - path: /api/controllers/wishlist.controller.php
+        type: file
+    - path: /api/routes
+      type: directory
+      contents:
+      - path: /api/routes/wishlist.route.php
+        type: file
+      - path: /api/routes/cart.route.php
+        type: file
+      - path: /api/routes/order.route.php
+        type: file
+      - path: /api/routes/book.route.php
+        type: file
+      - path: /api/routes/auth.route.php
+        type: file
+      - path: /api/routes/user.route.php
+        type: file
+      - path: /api/routes/category.route.php
+        type: file
+  - path: /about-us.html
+    type: file
+  - path: /my-profile.html
+    type: file
+  - path: /ordersummary.html
+    type: file
+  - path: /repo_structure.yaml
+    type: file
+  - path: /my-profile
+    type: directory
+    contents:
+    - path: /my-profile/purchases.html
+      type: file
+    - path: /my-profile/wishlist.html
+      type: file

@@ -79,13 +79,10 @@ function createBookElement(book) {
     stockStatusDiv.style.cssText = "font-family: 'Roboto';font-size: 18px;font-weight: bold;background-color: chartreuse; width: 100px;border-radius: 20px;";
     stockStatusDiv.innerHTML = '<p style="color: white;margin-left: 15px;">In Stock</p>';
 
-    const cartImg = document.createElement('img');
-    cartImg.style.height = "28px";
-    cartImg.src = './images/Cart.png';
 
     detailsDiv.appendChild(addToWishlistBtn);
     detailsDiv.appendChild(stockStatusDiv);
-    detailsDiv.appendChild(cartImg);
+
 
     article.appendChild(viewDiv);
     article.appendChild(titleDiv);
@@ -149,34 +146,6 @@ async function addToWishlist(event) {
         console.error('Error:', error);
         showToast('An error occurred', 'error');
     });
-}
-
-function showToast(message, type = 'success') {
-    const toast = document.createElement('div');
-    toast.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 10px 20px;
-        border-radius: 4px;
-        color: white;
-        opacity: 0;
-        transition: opacity 0.3s ease-in-out;
-        z-index: 1000;
-        background-color: ${type === 'success' ? '#4CAF50' : '#F44336'};
-    `;
-    toast.textContent = message;
-    document.body.appendChild(toast);
-
-    setTimeout(() => {
-        toast.style.opacity = '1';
-        setTimeout(() => {
-            toast.style.opacity = '0';
-            setTimeout(() => {
-                document.body.removeChild(toast);
-            }, 300);
-        }, 3000);
-    }, 100);
 }
 
 

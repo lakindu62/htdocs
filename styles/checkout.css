@@ -1,0 +1,130 @@
+
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 56px auto;
+    border: 1px solid #ddd;
+
+}
+.checkout-form, .order-summary {
+
+    background-color: #fff;
+    padding: 32px;
+    border-radius: 5px;
+
+}
+
+
+h1 {
+    color: #333;
+}
+
+h2{
+    font-size: 20px;
+    font-weight:500;
+    color: #7a7a7a;
+
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #7a7a7a;
+}
+.checkoutForm{
+    padding: 20px;
+}
+
+input[type="text"],
+input[type="tel"],
+select {
+    width: 90%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    
+}
+.payment-options {
+    margin-bottom: 20px;
+}
+.payment-option {
+    display: inline-block;
+    margin-right: 20px;
+}
+.payment-option input[type="radio"] {
+    display: none;
+}
+.payment-option label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.payment-option input[type="radio"]:checked + label {
+    background-color: #000000;
+    color: white;
+}
+.order-total {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+.order-amount {
+    font-size: 24px;
+    font-weight: bold;
+    background: linear-gradient(45deg, #6a11cb 0%, #2575fc 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+}
+.secure-payment {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #4CAF50;
+    margin-bottom: 20px;
+}
+.secure-payment svg {
+    margin-right: 5px;
+}
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.total {
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: right;
+}
+.make-payment {
+    background-color: #4477ae;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 20px;
+}
+.make-payment:hover {
+    background-color: #5a0cb2;
+}
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .checkout-form {
+        width: 60%;
+    }
+    .order-summary {
+        width: 35%;
+    }
+}

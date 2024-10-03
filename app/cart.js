@@ -31,6 +31,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 const cartItems = data.data;
                 populateCart(cartItems);
             } else {
+                const container = document.getElementById("container");
+                console.log(container);
+                container.innerHTML = "<div class='empty-cart'><p>No items in cart</p> <a href='/'>Continue Shopping</a></div>";
+
                 console.error(data.message);
             }
         })
@@ -40,9 +44,11 @@ document.addEventListener("DOMContentLoaded", function () {
 function populateCart(cartItems) {
     const cartTable = document.getElementById("cart-items");
     let total = 0;
-    cartItems.forEach((item) => {
-        const row = document.createElement("tr");
+ 
 
+    cartItems && cartItems.forEach((item) => {
+        const row = document.createElement("tr");
+        row.id = `cart-item-${item.book_id}`;
         // Product image
         const productImageCell = document.createElement("td");
         const img = document.createElement("img");
@@ -95,6 +101,15 @@ function populateCart(cartItems) {
         const subtotal = item.price * item.quantity;
         subtotalCell.textContent = subtotal;
         row.appendChild(subtotalCell);
+
+        // Delete button
+        const deleteCell = document.createElement("td");
+        const deleteButton = document.createElement("button");
+        deleteButton.innerHTML = '🗑️';
+        deleteButton.classList.add("delete-btn");
+        deleteButton.onclick = () => deleteCartItem(item.book_id);
+        deleteCell.appendChild(deleteButton);
+        row.appendChild(deleteCell);
 
         // Append row to table
         cartTable.appendChild(row);
@@ -171,4 +186,47 @@ const updateCart = () => {
     document.getElementById("subtotal").textContent = subtotal.toFixed(2);
     const total = subtotal + 600; // Flat shipping rate
     document.getElementById("total").textContent = total.toFixed(2);
+};
+
+// Function to delete a cart item
+const deleteCartItem = (itemId) => {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    const userId = userData ? userData.user_id : null;
+
+    if (!userId) {
+        console.error("User is not logged in");
+        return;
+    }
+
+    // Make a POST request to delete the item
+    fetch("../api/routes/cart.route.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+            book_id: itemId,
+            user_id: userId,
+            action: "remove_item",
+        }).toString(),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.status === "success") {
+                console.log(data);
+                
+                // Remove the item from the DOM
+                const row = document.getElementById(`cart-item-${itemId}`);
+                if (row) {
+                    row.remove();
+                }
+                // Update cart totals
+                updateCart();
+            } else {
+                console.error(data.message);
+            }
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
 };

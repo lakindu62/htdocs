@@ -55,8 +55,8 @@ document.addEventListener('click', (e) => {
     }
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    getAdminBookData();
+document.addEventListener('DOMContentLoaded', function() {
+    loadBooks();
     
     const form = document.getElementById('addBookForm');
     form.addEventListener('submit', function (event) {
@@ -81,4 +81,40 @@ function validateForm() {
     }
 
     return true;
+}
+
+function loadBooks() {
+    fetch('../api/routes/book.route.php?isAdmin=true')
+        .then(response => response.json())
+        .then(books => {
+            const tableBody = document.getElementById('bookList');
+            tableBody.innerHTML = '';
+            books.forEach(book => {
+                const row = `
+                    <tr data-book_id="${book.book_id}">
+                        <td>${book.book_id}</td>
+                        <td>${book.title}</td>
+                        <td>${book.author}</td>
+                        <td>$${parseFloat(book.price).toFixed(2)}</td>
+                        <td>${book.stock}</td>
+                        <td>
+                            <button onclick="editBook(${book.book_id})">Edit</button>
+                            <button onclick="deleteBook(${book.book_id})">Delete</button>
+                        </td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+function editBook(bookId) {
+    // Redirect to the edit book page with the book ID as a query parameter
+    window.location.href = `edit-book.html?id=${bookId}`;
+}
+
+function deleteBook(bookId) {
+    // Implement delete functionality
+    console.log('Delete book:', bookId);
 }

@@ -23,41 +23,25 @@
         <div class="profile-container">
             <!-- The sidebar will be inserted here by JavaScript -->
             <div class="main-content">
-                <header>
-                    <h3>Last Purchase</h3>
+                <header class="header ">
+                    <h3>My Orders</h3>
                     <div class="user-info">
-                        <span>Welcome, User </span>
-                        <a href="signIn.html"
-                            ><button class="logout-btn">Logout</button></a
-                        >
+                        <span id="welcome-message">Welcome, User</span>
+                        <button class="logout-btn" onclick="logout()">Logout</button>
                     </div>
                 </header>
-                <div class="purchase-cards">
-                    <div class="purchase-card">
-                        <div class="purchase-card__book-info">
-                            <img class="purchase-card__book-image" src="Img/book.png" alt="Book cover" />
-                            <div class="purchase-card__book-details">
-                                <h3 class="purchase-card__book-title">YAMUNA by Lionel Perera</h3>
-                                <p class="purchase-card__book-meta">ISBN: 9553127584</p>
-                                <p class="purchase-card__book-meta">Date: 22.08.2024</p>
-                                <p class="purchase-card__price">Rs. 100.00</p>
-                            </div>
-                        </div>
-                        <div class="purchase-card__actions">
-                            <button class="purchase-card__button">Inquiry</button>
-                            <a href="#" class="purchase-card__delete">
-                                <i class="fas fa-trash-alt"></i>
-                            </a>
-                        </div>
-                        <div class="purchase-card__review">
-                            <textarea
-                                class="purchase-card__textarea"
-                                placeholder="Enter your review here"
-                            ></textarea>
-                            <button class="purchase-card__button purchase-card__submit-review">Add review</button>
-                        </div>
-                    </div>
+                <div id="orders-container" class="purchase-cards">
+                    <!-- Orders will be dynamically inserted here -->
                 </div>
+            </div>
+        </div>
+
+        <!-- Add this modal structure at the end of the body -->
+        <div id="order-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Order Details</h2>
+                <div id="modal-order-details"></div>
             </div>
         </div>
 
@@ -65,6 +49,8 @@
         <script src="../app/common.js"></script>
         <script src="../app/profile/profile-common.js"></script>
         <script src="../app/profile-common.js"></script>
-        <script src="../app/purchase.js"></script>
+        <script src="../app/profile/purchase-details.js"></script>
+        <script src="../app/profile/purchase.js"></script>
+
     </body>
 </html>

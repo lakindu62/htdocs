@@ -10,18 +10,7 @@ require_once '../models/book.model.php'; // Include the model
 function getAdminDashboardBooksData()
 {
     $books = getBooks();
-    $html = '';
-    foreach ($books as $book) {
-        $html .= "<tr data-book_id=\"{$book['book_id']}\">
-        <td>{$book['book_id']}</td>
-                    <td>{$book['title']}</td>
-                    <td>{$book['author']}</td>
-                    <td>{$book['description']}</td>
-                    <td>{$book['price']}</td>
-                    <td>{$book['stock']}</td>
-                  </tr>";
-    }
-    return $html;
+    return json_encode($books);
 };
 
 

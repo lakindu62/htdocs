@@ -8,7 +8,7 @@ include "../config.php";
 function getBooks()
 {
     global $conn;
-    $sql = "select * from books";
+    $sql = "select title, price, imageUrl , book_id , author , stock  from books";
     $result = mysqli_query($conn, $sql);
 
     $books = [];

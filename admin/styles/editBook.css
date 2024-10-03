@@ -1,0 +1,70 @@
+/* Specific styles for edit book page */
+.category-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.category-pill {
+    background-color: #ecf0f1;
+    padding: 5px 10px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.delete-icon {
+    margin-left: 5px;
+    cursor: pointer;
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 5px;
+}
+
+#addCategoryBtn {
+    background-color: #2ecc71;
+    margin-top: 10px;
+}
+
+#addCategoryBtn:hover {
+    background-color: #27ae60;
+}
+
+#saveNewCategory {
+    background-color: #2ecc71;
+}
+
+#saveNewCategory:hover {
+    background-color: #27ae60;
+}
+
+#cancelNewCategory {
+    background-color: #e74c3c;
+}
+
+#cancelNewCategory:hover {
+    background-color: #c0392b;
+}
