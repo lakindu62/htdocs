@@ -1,0 +1,103 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f1ea;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.about-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.about-content {
+    flex: 1;
+    min-width: 300px;
+    padding-right: 2rem;
+}
+
+.about-image {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #34495e;
+    margin-bottom: 1rem;
+}
+
+p {
+    margin-bottom: 1.5rem;
+}
+
+.book-shape {
+    width: 300px;
+    height: 400px;
+    background-color: #3498db;
+    border-radius: 10px 0 0 10px;
+    position: relative;
+    display: inline-block;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.book-shape::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 100%;
+    background-color: #2980b9;
+    border-radius: 0 10px 10px 0;
+}
+
+.team-section {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 4rem;
+}
+
+.team-member {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.team-member img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 5px solid #3498db;
+}
+
+.quote {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    text-align: center;
+    margin: 3rem 0;
+    padding: 1rem;
+    border-left: 5px solid #3498db;
+    background-color: #ecf0f1;
+}

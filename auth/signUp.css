@@ -1,0 +1,238 @@
+body {
+  font-family: Robboto;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  text-align: center;
+}
+
+.container {
+  font-family: Roboto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2{
+  font-size: large;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+ 
+.input-group {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+input[type="email"],input[type="text"], input[type="password"]   {
+  padding: 5px 5px 5px 0; /* Adjust padding to prevent overlap */
+  border: 1px solid #dfdfdf;
+  border-radius: 4px;
+  width: 330px;
+  height: 20px;
+  font-size: 12px;
+  text-indent: 5px;
+  transition: border-color 0.5s ease;
+}
+
+input[type="email"]:focus, input[type="text"]:focus,input[type="password"]:focus {
+  border-color: #007BFF;
+  outline: 0.5px solid rgb(147, 147, 147);
+}
+
+input[type="email"]:focus + label,
+input[type="email"]:not(:placeholder-shown) + label,
+input[type="text"]:focus + label,
+input[type="text"]:not(:placeholder-shown) + label,
+input[type="password"]:focus + label,
+input[type="password"]:not(:placeholder-shown) + label {
+  top: -10px;
+  left: 8px;
+  font-size: 12px;
+  color: #007BFF;
+  background-color: white;
+  padding: 3px;
+}
+
+
+
+label {
+  position: absolute;
+  left: 12px;
+  top: 8px;
+  transition: 0.2s ease all;
+  color: #a2a2a2;
+  font-size: 13px;
+  pointer-events: none; /* Prevent clicking on the label */
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.divider span {
+  padding: 0 10px;
+  color: #999;
+  text-align: center;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-top: 1px solid #ccc;
+}
+
+.paraFordigits{
+  font-size: 10px;
+  color: red;
+  text-align: center;
+  margin-top: 0px;
+}
+
+.paraForlogin{
+  font-family: 15px;
+}
+
+
+
+.signup{
+  height: 30px;
+  width: 338px;
+  background-color: black;
+  color: white;
+  border:none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.signup:hover{
+  background-color: rgb(32, 31, 31);
+}
+
+.signup:active{
+  opacity: 0.8;
+}
+
+.google-login{
+  height: 25px;
+  width: 338px;
+  background-color: rgb(228, 228, 228);
+  border:none;
+  border-radius: 5px;
+  padding-top: 5px;
+
+}
+.google-login a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.google-login img {
+  margin-right: 15px; 
+}
+
+.googleHyperlink{
+  text-decoration:none; 
+  color: black;
+  font-size: small;
+  
+}
+
+.googleIcon {
+  width: 60px; 
+  height: 60px; 
+}
+
+.paraForlogin{
+  font-size: small;
+  
+}
+
+.logintoHyper{
+  text-decoration: none;
+  color: blue;
+}
+
+.policyPhase{
+  font-size: 10px;
+  color: #999;
+}
+
+.termofService,.privacyPolicy{
+  color: black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
+
+.quick-signup-text{
+  display: flex;
+    flex-direction: row;
+    height: 50px;
+    border: 1px;
+    margin-top: 0px;
+    border-style: none;
+    justify-content: center;
+    text-align: center;
+   
+}
+
+.quick-signup{
+  width: 90px;
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+  font-size: small;
+  z-index: 2;
+  position: relative;
+}
+
+.recForquick{
+  position: absolute;
+  z-index: 1;
+  bottom: 298px;
+  right: 190px;
+  justify-content: center;
+}
+
+@media(max-width: 750px){
+  .recForquick{
+    bottom: 298px;
+  right: 190px;
+  }
+}
+
+input{
+  width: 330px;
+  height: 20px;
+  text-indent: 5px;
+
+}
+*/

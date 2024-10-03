@@ -244,19 +244,34 @@ ORDER BY
 }
 
 
-function getAllBooksWithCategories()
-
+function getAllBooksWithCategories($user_id = null)
 {
     global $conn;
     $sql = "
-        SELECT Books.book_id, Books.title, Books.author, Books.price, Books.imageUrl, Categories.category_name
-        FROM Books
-        INNER JOIN Book_Categories ON Books.book_id = Book_Categories.book_id
-        INNER JOIN Categories ON Book_Categories.category_id = Categories.category_id
-        ORDER BY Categories.category_name, Books.title
+       SELECT 
+    Books.book_id, 
+    Books.title, 
+    Books.author, 
+    Books.price, 
+    Books.imageUrl, 
+    Categories.category_name,
+    CASE WHEN user_wishlist.book_id IS NOT NULL THEN 1 ELSE 0 END AS in_wishlist
+FROM Books
+INNER JOIN Book_Categories ON Books.book_id = Book_Categories.book_id
+INNER JOIN Categories ON Book_Categories.category_id = Categories.category_id
+LEFT JOIN (
+    SELECT Wishlist_Items.book_id
+    FROM Wishlist
+    INNER JOIN Wishlist_Items ON Wishlist.wishlist_id = Wishlist_Items.wishlist_id
+    WHERE Wishlist.user_id = ?
+) AS user_wishlist ON Books.book_id = user_wishlist.book_id
+ORDER BY Categories.category_name, Books.title
     ";
 
-    $result = mysqli_query($conn, $sql);
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     $booksByCategory = [];
 
@@ -264,6 +279,7 @@ function getAllBooksWithCategories()
         $booksByCategory[] = $row;
     }
 
+    $stmt->close();
     return $booksByCategory;
 }
 

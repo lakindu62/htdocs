@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Checkout Details</title>
+        <link rel="stylesheet" href="./styles/checkoutdetails.css" />
+        <link rel="stylesheet" href="./styles/common.css" />
+        <link rel="stylesheet" href="./styles/footer.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div id="header-container"></div>
+
+        <div class="progress-bar" id="progress-bar-container"></div>
+
+        <form action="" method="post">
+            <fieldset>
+                <legend id="bdetails">Billing Details</legend>
+
+                <div style="display: inline; float: right">
+                    <label for="pnumber">Phone Number</label>
+                    <br />
+                    <input
+                        type="tel"
+                        id="pnumber"
+                        name="pnumber"
+                        class="field"
+                        required
+                    />
+                    <br /><br />
+                    <label for="lastname">Last Name</label>
+                    <br />
+                    <input
+                        type="text"
+                        id="lastname"
+                        name="lastname"
+                        class="field"
+                    />
+                    <br /><br />
+                    <label for="town">Town/City</label>
+                    <br />
+                    <input type="text" id="town" name="town" class="field" />
+                    <br /><br />
+                    <label type="postalcode">Postal Code</label>
+                    <br />
+                    <input
+                        type="text"
+                        id="postalcode"
+                        name="postalcode"
+                        class="field"
+                        required
+                    />
+                    <br /><br />
+                </div>
+                <div>
+                    <label for="email">Email-Address</label>
+                    <br />
+                    <input
+                        type="email"
+                        id="email"
+                        name="Email-Address"
+                        class="field"
+                        required
+                    />
+                    <br /><br />
+                    <label for="firstname">First Name</label>
+                    <br />
+                    <input
+                        type="text"
+                        id="firstname"
+                        name="firstname"
+                        class="field"
+                    />
+                    <br /><br />
+                    <label for="postaladdress">Postal Address</label>
+                    <br />
+                    <input
+                        type="text"
+                        id="postaladdress"
+                        name="postaladdress"
+                        class="field"
+                    />
+                    <br /><br />
+                    <label>Select Payment Method</label>
+                    <br />
+                    <select class="field">
+                        <option>Cash on Delivery</option>
+                        <option>Card Payment</option>
+                    </select>
+                </div>
+
+                <section>
+                    <fieldset class="cdetails">
+                        <legend id="cpayment">Card Payment</legend>
+                        <label for="chname">Card Holder Name</label>
+                        <br />
+                        <input
+                            type="text"
+                            id="chname"
+                            name="chname"
+                            class="card"
+                            required
+                        />
+                        <br /><br />
+                        <label for="cardnumber">Card Number</label>
+                        <br />
+                        <input
+                            type="number"
+                            id="cardnumber"
+                            name="cardnumber"
+                            class="card"
+                            required
+                        />
+                        <br /><br />
+                        <label for="cvv">CVV</label>
+                        <br />
+                        <input type="text" id="cvv" name="cvv" class="card" />
+                        <br /><br />
+                        <input type="radio" id="creditcard" name="coption" />
+                        <label for="credicard">Credit Card</label>
+                        <br />
+                        <input type="radio" id="debitcard" name="coption" />
+                        <label for="debitcard">Debit Card</label>
+                    </fieldset>
+
+                    <table border="1">
+                        <tr>
+                            <th colspan="2">Order Summary</th>
+                        </tr>
+                        <tr>
+                            <td>Sub-Total(Rs.)</td>
+                            <td>11,600.00</td>
+                        </tr>
+                        <tr>
+                            <td>Shipping(Rs.)</td>
+                            <td>600.00</td>
+                        </tr>
+                        <tr>
+                            <td>TOTAL</td>
+                            <td>12,200.00</td>
+                        </tr>
+                    </table>
+                </section>
+
+                <button id="button">PROCEED TO CHECKOUT</button>
+            </fieldset>
+        </form>
+
+        <footer id="footer-container"></footer>
+        <script src="./app/common.js"></script>
+    </body>
+</html>

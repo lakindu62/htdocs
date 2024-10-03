@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sign Up</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="./signUp.css">
+    </head>
+    <body>      
+       
+        <div class="container">
+            <h2>Sign Up & Create Your Account</h2>
+
+            <div class="divider">
+                <span>Quick Sign up</span>
+            </div>
+            
+            <form id="signupForm" method="post">
+              <div class="input-group">            
+                <div class="input-group">
+                  <input type="text" id="firstName" name="firstName" required placeholder=" ">
+                  <label for="firstName">First Name</label>
+                </div>
+                
+                <div class="input-group">
+                  <input type="text" id="lastName" name="lastName" required placeholder=" ">
+                  <label for="lastName">Last Name</label>
+                </div>
+                
+                <div class="input-group">
+                  <input type="email" id="email" name="email" required placeholder=" ">
+                  <label for="email">Email Address</label>
+                </div>
+                
+                <div class="input-group">
+                  <input type="password" id="password" name="password" required placeholder=" ">
+                  <label for="password">Password</label>
+                </div>
+              </div>  
+
+                <p class="paraFordigits">Use at least one letter, one numeral, and seven characters.</p>
+
+                <button type="submit" class="signup">Sign Up</button>
+
+            </form>
+
+            <div class="google-login">
+                <a href="google_login.php" class="googleHyperlink"><img src="../images/Google.png" alt="google-logo"  width="17" height="17" > Sign up with Google</a>
+            </div>
+
+            <p class="paraForlogin">if you already have an account <a href="sign-in.html" class="logintoHyper">log in</a></p>
+
+            <p class="policyPhase">By clicking continue, you agree to our <span class="termofService">Terms of Service</span> and <span class="privacyPolicy">Privacy Policy</span></p>
+
+        </div>
+
+        <script>
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const formData = new FormData(this);
+          const data = {
+            action: 'register',
+            username: formData.get('firstName') + ' ' + formData.get('lastName'),
+            email: formData.get('email'),
+            password: formData.get('password')
+          };
+          
+          fetch('/api/routes/auth.route.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+          })
+          .then(response => response.json())
+          .then(result => {
+            if (result.status === 'success') {
+              // Set the logged-in state and user details in local storage
+              localStorage.setItem('isLoggedIn', 'true');
+              localStorage.setItem('userData', JSON.stringify({
+                user_id: result.user_id,
+                username: data.username,
+                email: data.email
+              }));
+              alert('Signup successful!');
+              window.location.href = '/'; // Redirect to dashboard or home page
+            } else {
+              alert('Signup failed: ' + result.message);
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred during signup.');
+          });
+        });
+        </script>
+        
+    </body>
+</html>

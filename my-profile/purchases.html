@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+            rel="stylesheet"
+        />
+
+        <link rel="stylesheet" href="../styles/purchases.css" />
+        <link rel="stylesheet" href="../styles/common.css" />
+        <link rel="stylesheet" href="../styles/footer.css" />
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+        <title>Orderlist</title>
+    </head>
+    <body>
+        <div id="header-container"></div>
+        <div class="profile-container">
+            <!-- The sidebar will be inserted here by JavaScript -->
+            <div class="main-content">
+                <header>
+                    <h3>Last Purchase</h3>
+                    <div class="user-info">
+                        <span>Welcome, User </span>
+                        <a href="signIn.html"
+                            ><button class="logout-btn">Logout</button></a
+                        >
+                    </div>
+                </header>
+                <div class="purchase-cards">
+                    <div class="purchase-card">
+                        <div class="purchase-card__book-info">
+                            <img class="purchase-card__book-image" src="Img/book.png" alt="Book cover" />
+                            <div class="purchase-card__book-details">
+                                <h3 class="purchase-card__book-title">YAMUNA by Lionel Perera</h3>
+                                <p class="purchase-card__book-meta">ISBN: 9553127584</p>
+                                <p class="purchase-card__book-meta">Date: 22.08.2024</p>
+                                <p class="purchase-card__price">Rs. 100.00</p>
+                            </div>
+                        </div>
+                        <div class="purchase-card__actions">
+                            <button class="purchase-card__button">Inquiry</button>
+                            <a href="#" class="purchase-card__delete">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+                        <div class="purchase-card__review">
+                            <textarea
+                                class="purchase-card__textarea"
+                                placeholder="Enter your review here"
+                            ></textarea>
+                            <button class="purchase-card__button purchase-card__submit-review">Add review</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer id="footer-container"></footer>
+        <script src="../app/common.js"></script>
+        <script src="../app/profile/profile-common.js"></script>
+        <script src="../app/profile-common.js"></script>
+        <script src="../app/purchase.js"></script>
+    </body>
+</html>

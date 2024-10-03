@@ -1,8 +1,12 @@
 
-section{
+
+.category-section{
     display: flex;
+    justify-content: flex-start !important;
+    gap: 12px;
 }
 .hero{
+    display: flex;
     flex-direction: row;
     height: 965px;
     width: 1500px;
@@ -40,7 +44,7 @@ section{
 .displays{
     width: 330px;
     border-radius: 15px;
-    border: 5px solid rgb(69, 118, 175);
+    border: 1px solid rgb(69, 118, 175);
     display: flex;
     flex-direction: column;
     

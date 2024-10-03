@@ -1,0 +1,88 @@
+.map
+{
+    display:flex;
+    flex-direction: row;
+    height: 200px;
+    width: 1500px;
+    margin-right: auto;
+    margin-left: auto;
+    justify-content: space-between;
+    font-size: 32px;
+    font-family: 'Roboto';
+    color: blue;
+
+}
+
+.map div
+{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    height:100px;
+    width: 400px;
+    justify-content: space-between;
+
+}
+
+.map div p{
+    display: inline;
+    
+}
+
+table
+{
+    border-collapse:collapse;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    font-size: 28px;
+    font-family: 'Roboto';
+    margin: auto;
+    border-color:rgb(69,118,175) ;
+    border-width: 2px;
+
+}
+
+table th
+{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+table td
+{
+    padding: 30px;
+    border-left: none;
+    border-right: none;
+}
+
+fieldset
+{
+    width: 1500px;
+    height: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    border-width: 3px;
+    border-color: rgb(69,118,175);
+
+}
+
+#ordersummary
+{
+    font-size: 32px;
+    font-family: 'Roboto';
+    font-weight: bold;
+
+     
+}
+
+#para
+{
+    font-size: 20px;
+    font-family: 'Roboto';
+    margin-top: 60px;
+    margin-left: 400px;
+    
+}

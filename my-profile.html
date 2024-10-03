@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+            rel="stylesheet"
+        />
+
+        <link rel="stylesheet" href="./styles/my-profile.css" />
+        <link rel="stylesheet" href="./styles/common.css" />
+        <link rel="stylesheet" href="./styles/footer.css" />
+
+        <title>User Profile</title>
+    </head>
+    <body>
+        <div id="header-container"></div>
+        <div class="profile-container">
+            <!-- The sidebar will be inserted here by JavaScript -->
+            <div class="main-content">
+                <header class="profile-header">
+                    <h3>User Profile</h3>
+                    <div class="user-info">
+                        <span>Welcome, User </span>
+                        <button id="logoutBtn" class="logout-btn">Logout</button>
+                    </div>
+                </header>
+                <div class="chart">
+                    <form>
+                        <fieldset>
+                            <legend>Personal Information</legend>
+                            <div class="input-groupinline">
+                                <input
+                                    type="email"
+                                    id="email"
+                                    required
+                                    placeholder=" "
+                                />
+                                <label for="email">First Name</label>
+                            </div>
+                            <div class="input-groupinline">
+                                <input
+                                    type="email"
+                                    id="email"
+                                    required
+                                    placeholder=" "
+                                />
+                                <label for="email">Last Name</label>
+                            </div>
+                            <div class="input-groupinline">
+                                <input
+                                    type="text"
+                                    id="text"
+                                    required
+                                    placeholder=" "
+                                />
+                                <label for="text">Phone Number</label>
+                            </div>
+                            <div class="input-groupinline">
+                                <input
+                                    type="email"
+                                    id="email"
+                                    required
+                                    placeholder=" "
+                                />
+                                <label for="email">Home address</label>
+                            </div>
+                            <h3>Change password</h3>
+                            <div class="input-group">
+                                <input
+                                    type="password"
+                                    id="password"
+                                    required
+                                    placeholder=" "
+                                />
+                                <label for="password">Password</label>
+                            </div>
+                            <div class="input-group">
+                                <input
+                                    type="password"
+                                    id="password"
+                                    required
+                                    placeholder=" "
+                                />
+                                <label for="password">Confirm Password</label>
+                            </div>
+                            <button class="submit" type="submit">
+                                Save Changes
+                            </button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <footer id="footer-container"></footer>
+        <script src="./app/common.js"></script>
+        <script src="./app/profile/profile-common.js"></script>
+        <script src="./app/my-profile.js"></script>
+    </body>
+</html>

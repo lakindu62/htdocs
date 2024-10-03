@@ -65,9 +65,9 @@ function getBookDetailsController($book_id)
 
 
 
-function getBooksByCategory()
+function getBooksByCategory($user_id)
 {
-    $booksByCategory = getAllBooksWithCategories(); 
+    $booksByCategory = getAllBooksWithCategories($user_id); 
     header('Content-Type: application/json'); 
     return json_encode($booksByCategory); //  JSON encoded data
 }

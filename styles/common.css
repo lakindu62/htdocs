@@ -5,6 +5,8 @@ body {
     background-color: #f9f9f9;
 }
 
+
+
 /* Header styles */
 header {
     display: flex;
@@ -15,18 +17,19 @@ header {
 }
 
 .logo img {
-    max-width: 100px;
+    max-width: 125px;
 }
 
 .account {
     display: flex;
+    gap: 16px;
     align-items: center;
 }
 
 .account img {
     width: 30px;
     height: 30px;
-    margin-left: 10px;
+
 }
 
 /* Navigation styles */
@@ -49,6 +52,10 @@ nav li {
 
 nav a {
     color: white;
+    text-decoration: none;
+}
+
+a{
     text-decoration: none;
 }
 

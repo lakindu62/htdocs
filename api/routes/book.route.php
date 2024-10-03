@@ -11,6 +11,7 @@ switch ($requestMethod) {
         $isAdmin = isset($_GET['isAdmin']) ? $_GET['isAdmin'] : null;
 
         $book_id = isset($_GET["book_id"]) ? $_GET["book_id"] : null;
+        $user_id = isset($_GET["user_id"]) ? $_GET["user_id"] : null;
         if ($book_id && $isAdmin) {
             $json = getAdminSingleBookDataController($book_id);
             echo $json;
@@ -32,7 +33,7 @@ switch ($requestMethod) {
         }
 
 
-        $json = getBooksByCategory();
+        $json = getBooksByCategory($user_id);
         echo $json;
         break;
 

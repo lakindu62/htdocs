@@ -1,0 +1,300 @@
+/* General styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  background-color: #f4f4f4;
+}
+
+/* Layout */
+.profile-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+  min-height: 75vh;
+  padding: 0 1.5rem; /* Added padding here */
+}
+
+.main-content {
+  flex: 1;
+  /* Removed padding from here */
+  padding: 0 1.25rem; 
+}
+
+/* Header styles */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  background-color: white;
+  padding: 0.625rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.logout-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.625rem 0.9375rem;
+  cursor: pointer;
+  border-radius: 0.3125rem;
+  margin-left: 0.3125rem;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #d13929;
+}
+
+.logout-btn:active {
+  opacity: 0.7;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 40px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.book{
+  display: block;
+}
+
+.card h6 {
+  margin: 0 0 10px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.value {
+  font-size: small;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.bookPrice{
+  margin-left: 10px;
+}
+
+.bookHistory{
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.bookHistory p{
+  font-size: 10px;
+}
+
+.priceDiv p{
+  font-size: 10px;
+  margin-left: 80px;
+  margin-right: 110px;
+}
+
+.inquiryBtn{
+  margin-top: 5px;
+}
+
+.binClean img{
+  margin-top: 7px;
+  margin-left: 100px;
+  margin-right: 50px;
+}
+
+.textarea-container {
+  width: 140px;
+  margin-bottom: 20px;
+}
+
+.textarea {
+  width: 100%;
+  height: 50px; 
+  border: 1px solid #ccc;
+  padding: 10px;
+  resize: vertical;
+  font-family: Roboto,Arial, sans-serif;
+}
+
+.textarea-container button{
+  margin-left: 70px;
+  font-size: 10px;
+}
+
+.inquiryBtn,.addReview{
+  padding: 5px 10px;
+  align-items: center;
+  border-radius: 6px;
+  background: #ABBED1;
+  margin-left: 35px;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.inquiryBtn:hover,.addReview:hover{
+  background-color:  #819db8;
+}
+
+.inquiryBtn:active,.addReview:active{
+  background-color:  #637c94;
+}
+
+/* Card styles */
+.purchase-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.purchase-card {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fff;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.purchase-card:hover {
+  transform: translateY(-0.3125rem);
+}
+
+.purchase-card__book-info {
+  display: flex;
+  align-items: flex-start;
+  margin-right: 1.25rem;
+}
+
+.purchase-card__book-image {
+  width: 5rem;
+  height: auto;
+  margin-right: 1rem;
+}
+
+.purchase-card__book-details {
+  flex: 1;
+}
+
+.purchase-card__book-title {
+  font-size: 1rem;
+  margin: 0 0 0.5rem;
+}
+
+.purchase-card__book-meta {
+  font-size: 0.75rem;
+  color: #666;
+  margin: 0 0 0.25rem;
+}
+
+.purchase-card__price {
+  font-size: 0.875rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+
+.purchase-card__actions {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.purchase-card__button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  background-color: #ABBED1;
+  border: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: background-color 0.3s ease;
+}
+
+.purchase-card__button:hover {
+  background-color: #819db8;
+}
+
+.purchase-card__button:active {
+  background-color: #637c94;
+}
+
+.purchase-card__delete {
+  margin-left: 1rem;
+  color: #e74c3c;
+  cursor: pointer;
+}
+
+.purchase-card__review {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.purchase-card__textarea {
+  width: 100%;
+  height: 3.125rem;
+  border: 1px solid #ccc;
+  padding: 0.625rem;
+  resize: vertical;
+  font-family: 'Roboto', Arial, sans-serif;
+  margin-bottom: 0.5rem;
+}
+
+.purchase-card__submit-review {
+  display: block;
+  margin-left: auto;
+}
+
+/* Responsive styles */
+@media (max-width: 48rem) {
+  .profile-container {
+    flex-direction: column;
+    padding: 0 1.25rem; /* Updated padding for mobile view */
+  }
+
+  .main-content {
+    padding: 0 0rem; /* Updated padding for mobile view */
+  }
+
+  .purchase-card {
+    flex-direction: column;
+  }
+
+  .purchase-card__book-info {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .purchase-card__actions {
+    flex-wrap: wrap;
+  }
+
+  .purchase-card__button,
+  .purchase-card__delete,
+  .purchase-card__submit-review {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+}

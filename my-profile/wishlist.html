@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+            rel="stylesheet"
+        />
+
+        <link rel="stylesheet" href="../styles/wishList.css" />
+        <link rel="stylesheet" href="../styles/common.css" />
+        <link rel="stylesheet" href="../styles/footer.css" />
+
+        <title>Wishlist</title>
+    </head>
+    <body>
+        <div id="header-container"></div>
+        <div class="profile-container">
+            <!-- The sidebar will be dynamically inserted here -->
+            <div class="main-content">
+                <header class="header">
+                    <h3>Wishlist</h3>
+                    <div class="user-info">
+                        <span>Welcome, User </span>
+                        <a href="signIn.html"><button class="logout-btn">Logout</button></a>
+                    </div>
+                </header>
+                <table class="wishlist-table">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Title</th>
+                            <th>ISBN</th>
+                            <th>Date</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Image"><img src="/images/book1.png" alt="Book cover" /></td>
+                            <td data-label="Title">YAMUNA by Lionel Perera</td>
+                            <td data-label="ISBN">9553127584</td>
+                            <td data-label="Date">22.08.2024</td>
+                            <td data-label="Price">Rs. 100.00</td>
+                            <td data-label="Actions">
+                                <div class="wishlist-actions">
+                                    <button class="btn">Add to cart</button>
+                                    <button class="btn btn--delete"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <footer id="footer-container"></footer>
+        <script src="../app/common.js"></script>
+        <script src="../app/profile/profile-common.js"></script>
+        <script src="../app/profile/wishlist.js"></script>
+    </body>
+</html>
