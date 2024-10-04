@@ -127,8 +127,8 @@ html {
     font-size: 20px;
     cursor: pointer;
     position: fixed;
-    top: 10px;
-    left: 10px;
+    bottom: 32px;
+    right: 32px;
     z-index: 1001;
 }
 

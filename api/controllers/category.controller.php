@@ -7,16 +7,7 @@ function getCategories()
     return json_encode($categories);
 }
 
-function createCategoryController($data)
-{
-    $categoryName = $data['category_name'];
 
-    if (empty($categoryName)) {
-        return json_encode(["status" => "error", "message" => "Category name is required."]);
-    }
-
-    return createCategory($categoryName);
-}
 
 function updateCategoryController($data)
 {
@@ -39,5 +30,19 @@ function deleteCategoryController($data)
     }
 
     return deleteCategory($categoryId);
+}
+
+function getAllCategoriesController() {
+    $categories = getAllCategories();
+    return json_encode($categories);
+}
+
+function createCategoryController($category_name) {
+    $category_id = createCategory($category_name);
+    if ($category_id) {
+        return json_encode(["success" => true, "message" => "Category created successfully", "category_id" => $category_id]);
+    } else {
+        return json_encode(["success" => false, "message" => "Error creating category"]);
+    }
 }
 ?>

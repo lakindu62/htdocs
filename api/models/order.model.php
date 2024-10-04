@@ -142,8 +142,6 @@ function getUserOrders($user_id) {
     return $orders;
 }
 
-
-
 function getAllOrders() {
     global $conn;
     $stmt = $conn->prepare("
@@ -215,4 +213,20 @@ function getRevenueData() {
     
     $stmt->close();
     return $revenueData;
+}
+
+function getSalesOverview() {
+    global $conn;
+    
+    $query = "SELECT 
+        SUM(total_amount) AS total_sales,
+        COUNT(*) AS total_orders,
+        AVG(total_amount) AS avg_order_value
+    FROM Orders
+    WHERE order_date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)";
+    
+    $result = $conn->query($query);
+    $overview = $result->fetch_assoc();
+    
+    return $overview;
 }

@@ -1,67 +1,177 @@
-aside{
-    width: 400px;
-    height: 800px;
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+}
+
+.search-pane {
+    display: flex;
+    height: calc(100vh - 100px); /* Adjust based on your header height */
+    margin-top: 20px;
+    padding: 20px;
+}
+
+aside {
+    width: 300px;
+    background-color: #4576AF; /* Light blue background */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    overflow-y: auto;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+aside h2 {
+    color: #565656!important; /* Darker text for better contrast */
+    font-size: 24px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #3498db; /* Light blue border */
+    font-weight: 600;
+}
+
+#category-filters {
+    margin-bottom: 30px;
+}
+
+#category-filters label {
+    display: block;
+    margin-bottom: 15px;
+    color: #e6e6e6;
+    font-size: 16px;
+}
+
+#category-filters input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+#price-filter h3 {
+    color: #e6e6e6;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+#price-filter input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.result-bar {
+    flex-grow: 1;
+    padding: 30px;
     display: flex;
     flex-direction: column;
-    background-color: rgb(69, 118, 175);
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    margin-top: 200px;
+    overflow: hidden;
 }
-.search-pane{
-    height: 4100px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+
+.text1 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
 }
-.result-bar{
-    width: 1300px;
+
+.search-bar {
+    margin-bottom: 30px;
+}
+
+.search-field {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.search-field:focus {
+    outline: none;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+}
+
+#books-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    overflow-y: auto;
+    padding-right: 20px;
+    padding: 20px;
+}
+
+.displays {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 8px;
+    height: 380px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
-    margin-top: 60px;
+}
+.view{
+    padding-top: 0px !important;
+}
+.view img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
 
 }
-.text1{
-    font-family: 'Roboto';
-    font-size: 42px;
-    padding-left: 250px;
+
+.title {
+    padding: 10px;
+    flex-grow: 1;
 }
-.search-bar{
-    display: flex;
-    flex-direction: row;
-    height: 100px;
-    justify-content: center;
+
+.title p {
+    font-size: 16px;
+    color: #333;
+    margin: 0;
 }
-.search-field{
-    height: 70px;
-    border: 3px solid rgb(69, 118, 175);
-    width: 800px;
-    border-radius: 10px;
-    font-size: 24px;
-    padding-left: 20px;
+
+.price {
+    padding: 0 10px 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #4a4a4a;
 }
-.search-icon{
-    width: 40%;
+
+.details {
+    padding: 10px;
+    background-color: #f9f9f9;
 }
-.search-button{
-    height: 54px;
-    width: 100px;
-    background-color: rgb(69, 118, 175);
-    border: 3px solid rgb(69, 118, 175);
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    margin-right: -5px;
+
+.details img {
+    height: 25px;
 }
-hr{
-    background-color: rgb(69, 118, 175);
-    width: 1100px;
-    margin-top: 40px;
-    border: 3px solid rgb(69, 118, 175);
+
+.stock-status {
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 12px;
 }
-.row1{
-    margin-top: 50px;
-    height: 700px;
-    justify-content: space-between;
-    width: 1100px;
-    margin-left: 100px;
+
+/* Add this media query at the end of your CSS file */
+@media screen and (max-width: 768px) {
+    aside {
+        display: none;
+    }
+
+    .search-pane {
+        flex-direction: column;
+    }
+
+    .result-bar {
+        width: 100%;
+        padding: 15px;
+    }
+
+    #books-container {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+    }
 }

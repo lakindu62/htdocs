@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
+
+    function checkLoginStatus() {
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        if (!isLoggedIn || isLoggedIn !== 'true') {
+            // If not logged in, redirect to the sign-in page
+            window.location.href = '/auth/sign-in.html';
+        }
+    }
+
     const userData = JSON.parse(localStorage.getItem('userData'));
     if (!userData || !userData.user_id) {
         alert('User data not found. Please log in.');

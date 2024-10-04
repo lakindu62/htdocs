@@ -29,68 +29,28 @@
                     </div>
                 </header>
                 <div class="chart">
-                    <form>
-                        <fieldset>
-                            <legend>Personal Information</legend>
-                            <div class="input-groupinline">
-                                <input
-                                    type="email"
-                                    id="email"
-                                    required
-                                    placeholder=" "
-                                />
-                                <label for="email">First Name</label>
-                            </div>
-                            <div class="input-groupinline">
-                                <input
-                                    type="email"
-                                    id="email"
-                                    required
-                                    placeholder=" "
-                                />
-                                <label for="email">Last Name</label>
-                            </div>
-                            <div class="input-groupinline">
-                                <input
-                                    type="text"
-                                    id="text"
-                                    required
-                                    placeholder=" "
-                                />
-                                <label for="text">Phone Number</label>
-                            </div>
-                            <div class="input-groupinline">
-                                <input
-                                    type="email"
-                                    id="email"
-                                    required
-                                    placeholder=" "
-                                />
-                                <label for="email">Home address</label>
-                            </div>
-                            <h3>Change password</h3>
-                            <div class="input-group">
-                                <input
-                                    type="password"
-                                    id="password"
-                                    required
-                                    placeholder=" "
-                                />
-                                <label for="password">Password</label>
-                            </div>
-                            <div class="input-group">
-                                <input
-                                    type="password"
-                                    id="password"
-                                    required
-                                    placeholder=" "
-                                />
-                                <label for="password">Confirm Password</label>
-                            </div>
-                            <button class="submit" type="submit">
-                                Save Changes
-                            </button>
-                        </fieldset>
+                    <form id="profileForm">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" required>
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+
+                        <button type="button" id="updateProfileBtn" style="display: none;">Update Profile</button>
+                    </form>
+
+                    <h3>Change Password</h3>
+                    <form id="changePasswordForm">
+                        <label for="currentPassword">Current Password:</label>
+                        <input type="password" id="currentPassword" name="currentPassword" required>
+                    
+                        <label for="newPassword">New Password:</label>
+                        <input type="password" id="newPassword" name="newPassword" required>
+                    
+                        <label for="confirmPassword">Confirm New Password:</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    
+                        <button type="button" id="changePasswordBtn">Change Password</button>
                     </form>
                 </div>
             </div>

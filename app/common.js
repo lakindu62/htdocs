@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <li><a href="/books.html">BOOKS</a></li>
                 <li><a href="/about-us.html">ABOUT US</a></li>
                 <li><a href="/suggest.html">SUGGEST A BOOK</a></li>
-                <li><a href="#">PROMOTIONS</a></li>
+                <li><a href="/promotions.html">PROMOTIONS</a></li>
             </ul>
         </nav>
         <div class="sidebar">
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <li><a href="/books.html">BOOKS</a></li>
                 <li><a href="/about-us.html">ABOUT US</a></li>
                 <li><a href="/suggest.html">SUGGEST A BOOK</a></li>
-                <li><a href="#">PROMOTIONS</a></li>
+                <li><a href="/promotions.html">PROMOTIONS</a></li>
             </ul>
         </div>
     `;
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <li><a href="/ books.html">Books</a></li>
                 <li><a href="/about-us.html">About Us</a></li>
                 <li><a href="/suggest.html">Suggest a Book</a></li>
-                <li><a href="#">Promotions</a></li>
+                <li><a href="/promotions.html">Promotions</a></li>
             </ul>
         </div>
         <div class="two">

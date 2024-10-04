@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const userId = userData ? userData.user_id : null;
     if (!userId) {
         console.error('User is not logged in');
-        // You might want to redirect to login page or show an error message
+        window.location.href = '/auth/sign-in.html';
     }
     loadWishlistItems(userId);
 });

@@ -16,6 +16,8 @@ switch ($requestMethod) {
         } elseif (isset($_GET['revenue_data'])) {
             $days = isset($_GET['days']) ? intval($_GET['days']) : 30;
             echo getRevenueDataController($days);
+        } elseif (isset($_GET['sales_overview'])) {
+            echo getSalesOverviewController();
         } else {
             echo json_encode(['error' => 'Invalid GET request']);
         }

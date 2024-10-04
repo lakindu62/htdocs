@@ -18,35 +18,41 @@
         <div id="header-container"></div>
 
         <section class="form">
-            <form>
+            <form id="suggestionForm">
                 <fieldset>
                     <legend>SUGGEST A BOOK</legend>
-                    <label class="text">Title of the Book</label><br /><br />
+                    <label class="text" for="title">Title of the Book</label><br /><br />
                     <img class="logo" src="./images/logo.png" />
                     <input
                         type="text"
+                        id="title"
                         name="title"
+                        required
                     /><br /><br /><br /><br /><br />
-                    <label class="text">Author</label><br /><br /><br />
+                    <label class="text" for="author">Author</label><br /><br /><br />
                     <input
                         type="text"
-                        name="Author"
+                        id="author"
+                        name="author"
+                        required
                     /><br /><br /><br /><br /><br />
-                    <label class="text">E-mail</label><br /><br /><br />
+                    <label class="text" for="email">E-mail</label><br /><br /><br />
                     <input
                         type="email"
+                        id="email"
                         name="email"
+                        required
                     /><br /><br /><br /><br /><br />
-                    <select>
-                        <option value="Genre" selected>Genre</option>
+                    <select id="category" name="category" required>
+                        <option value="" disabled selected>Genre</option>
                         <option value="Romance">Romance</option>
-                        <option value="Romance">Novels</option>
-                        <option value="Romance">Mystery</option>
-                        <option value="Romance">Science-fiction</option>
-                        <option value="Romance">Education</option>
-                        <option value="Romance">Children</option>
-                        <option value="Romance">Thriller</option>
-                        <option value="Romance">Research articles</option>
+                        <option value="Novels">Novels</option>
+                        <option value="Mystery">Mystery</option>
+                        <option value="Science-fiction">Science-fiction</option>
+                        <option value="Education">Education</option>
+                        <option value="Children">Children</option>
+                        <option value="Thriller">Thriller</option>
+                        <option value="Research articles">Research articles</option>
                     </select>
                     <input
                         id="suggest"
@@ -60,5 +66,6 @@
         <footer id="footer-container"></footer>
 
         <script src="./app/common.js"></script>
+        <script src="./app/suggest.js"></script>
     </body>
 </html>

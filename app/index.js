@@ -1,9 +1,8 @@
 // Fetch the book data from the PHP route
 async function fetchBooks() {
-    const user = JSON.parse(localStorage.getItem('userData'));
-    const user_id = user.user_id;
+
     try {
-        const response = await fetch('./api/routes/book.route.php?user_id=' + user_id);
+        const response = await fetch('./api/routes/book.route.php');
         const books = await response.json();
 
         
@@ -76,9 +75,8 @@ function createBookElement(book) {
     addToWishlistBtn.addEventListener('click', addToWishlist);
 
     const stockStatusDiv = document.createElement('div');
-    stockStatusDiv.style.cssText = "font-family: 'Roboto';font-size: 18px;font-weight: bold;background-color: chartreuse; width: 100px;border-radius: 20px;";
-    stockStatusDiv.innerHTML = '<p style="color: white;margin-left: 15px;">In Stock</p>';
-
+    stockStatusDiv.classList.add('stock-status');
+    stockStatusDiv.innerHTML = '<p>In Stock</p>';
 
     detailsDiv.appendChild(addToWishlistBtn);
     detailsDiv.appendChild(stockStatusDiv);

@@ -66,28 +66,26 @@ function getBooksByCategory($user_id)
 
 function createBookController()
 {
-
     $title = $_POST['title'];
     $author = $_POST['author'];
     $description = $_POST['description'];
     $imageUrl = $_POST['imageUrl'];
     $price = $_POST['price'];
     $stock = $_POST['stock'];
+    $categories = json_decode($_POST['categories'], true);
 
+    $book_id = createBook($title, $author, $stock, $description, $imageUrl, $price);
+ 
 
-
-
-
-
-
-    createBook(
-        $title,
-        $author,
-        $stock,
-        $description,
-        $imageUrl,
-        $price
-    );
+    if ($book_id) {
+        if (!empty($categories)) {
+            
+            updateBookCategories($book_id, $categories);
+        }
+        return json_encode(["success" => true, "message" => "Book added successfully."]);
+    } else {
+        return json_encode(["success" => false, "message" => "Error adding book."]);
+    }
 }
 
 
@@ -134,4 +132,12 @@ function getAnalyticsController()
     ];
 
     return json_encode($response);
+}
+
+function deleteBookController($book_id) {
+    if (deleteBook($book_id)) {
+        return json_encode(["success" => true, "message" => "Book deleted successfully."]);
+    } else {
+        return json_encode(["success" => false, "message" => "Error deleting book."]);
+    }
 }

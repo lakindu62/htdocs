@@ -74,19 +74,17 @@ function searchOrders(searchTerm) {
     displayOrders(filteredOrders);
 }
 
+// Add this function to fetch the sales overview
 async function loadSalesOverview() {
     try {
-        const response = await fetch('/api/routes/order.route.php');
+        const response = await fetch('../api/routes/order.route.php?sales_overview=true');
         const data = await response.json();
 
         if (data.success) {
-            const totalSales = data.totalSales;
-            const totalOrders = data.totalOrders;
-            const avgOrderValue = totalSales / totalOrders;
-
-            document.getElementById('total-sales').textContent = `$${totalSales.toFixed(2)}`;
-            document.getElementById('total-orders').textContent = totalOrders;
-            document.getElementById('avg-order-value').textContent = `$${avgOrderValue.toFixed(2)}`;
+            const overview = data.overview;
+            document.getElementById('total-sales').textContent = `$${parseFloat(overview.total_sales).toFixed(2)}`;
+            document.getElementById('total-orders').textContent = overview.total_orders;
+            document.getElementById('avg-order-value').textContent = `$${parseFloat(overview.avg_order_value).toFixed(2)}`;
         } else {
             console.error('Failed to load sales overview:', data.message);
         }
@@ -135,9 +133,7 @@ function displayOrders(orders) {
                     <option value="Cancelled" ${order.order_status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
                 </select>
             </td>
-            <td>
-                <button class="view-details-btn" onclick="viewOrderDetails(${order.order_id})">View Details</button>
-            </td>
+            
         `;
         tableBody.appendChild(row);
     });

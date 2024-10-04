@@ -45,9 +45,6 @@ closeModal.addEventListener('click', () => {
     addBookModal.style.display = 'none';
 });
 
-menuBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('show');
-});
 
 document.addEventListener('click', (e) => {
     if (!sidebar.contains(e.target) && e.target !== menuBtn) {
@@ -58,11 +55,13 @@ document.addEventListener('click', (e) => {
 document.addEventListener('DOMContentLoaded', function() {
     loadBooks();
     loadAnalytics();
+    loadCategories(); // Add this line to load categories when the page loads
     
     const form = document.getElementById('addBookForm');
     form.addEventListener('submit', function (event) {
-        if (!validateForm()) {
-            event.preventDefault();
+        event.preventDefault();
+        if (validateForm()) {
+            submitForm();
         }
     });
 
@@ -120,8 +119,8 @@ function displayBooks(books) {
                 <td>$${parseFloat(book.price).toFixed(2)}</td>
                 <td>${book.stock}</td>
                 <td>
-                    <button onclick="editBook(${book.book_id})">Edit</button>
-                    <button onclick="deleteBook(${book.book_id})">Delete</button>
+                    <button class="edit-btn" onclick="editBook(${book.book_id})">Edit</button>
+                    <button class="delete-btn" onclick="deleteBook(${book.book_id})">Delete</button>
                 </td>
             </tr>
         `;
@@ -156,14 +155,95 @@ function editBook(bookId) {
 }
 
 function deleteBook(bookId) {
-    // Implement delete functionality
-    console.log('Delete book:', bookId);
+    if (confirm('Are you sure you want to delete this book?')) {
+        fetch('../api/routes/book.route.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `action=delete&bookId=${bookId}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showToast('Book deleted successfully');
+                loadBooks(); // Refresh the book list
+            } else {
+                showToast('Error deleting book: ' + data.message, 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showToast('An error occurred while deleting the book', 'error');
+        });
+    }
 }
 
+function loadCategories() {
+    fetch('../api/routes/category.route.php')
+        .then(response => response.json())
+        .then(categories => {
+            const categorySelect = document.getElementById('categorySelect');
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.category_id;
+                option.textContent = category.category_name;
+                categorySelect.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error:', error));
+}
 
+function updateSelectedCategories() {
+    const categorySelect = document.getElementById('categorySelect');
+    const selectedCategories = document.getElementById('selectedCategories');
+    selectedCategories.innerHTML = '';
 
+    Array.from(categorySelect.selectedOptions).forEach(option => {
+        const categorySpan = document.createElement('span');
+        categorySpan.className = 'selected-category';
+        categorySpan.textContent = option.textContent;
+        categorySpan.dataset.id = option.value;
 
+        const removeBtn = document.createElement('button');
+        removeBtn.textContent = 'x';
+        removeBtn.onclick = function() {
+            option.selected = false;
+            updateSelectedCategories();
+        };
 
+        categorySpan.appendChild(removeBtn);
+        selectedCategories.appendChild(categorySpan);
+    });
+}
+
+document.getElementById('categorySelect').addEventListener('change', updateSelectedCategories);
+
+//adding a book
+function submitForm() {
+    const form = document.getElementById('addBookForm');
+    const formData = new FormData(form);
+    
+    // Add selected categories to formData
+    const selectedCategories = Array.from(document.getElementById('categorySelect').selectedOptions).map(option => option.value);
+    formData.append('categories', JSON.stringify(selectedCategories));
+
+    fetch('../api/routes/book.route.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Book added successfully');
+            document.getElementById('addBookModal').style.display = 'none';
+            loadBooks(); // Refresh the book list
+        } else {
+            alert('Error adding book: ' + data.message);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
 
 function loadAnalytics() {
     fetch('../api/routes/book.route.php?action=analytics')

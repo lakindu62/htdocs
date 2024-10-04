@@ -114,6 +114,14 @@ CREATE TABLE Order_Items (
     FOREIGN KEY (book_id) REFERENCES Books(book_id)
 );
 
+CREATE TABLE Book_Suggestions (
+    suggestion_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_email VARCHAR(255),                     
+    book_author VARCHAR(255),                    
+    book_category VARCHAR(100),               
+    book_title VARCHAR(255)                      
+);
+
 
 ---The YAML FILE below is Folder Structure of my project. use this to give accurate answers when importing files
 

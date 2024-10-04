@@ -44,13 +44,11 @@ switch ($requestMethod) {
         break;
 
 
-       
+
 
     case 'POST':
 
         $data = $_POST;
-
-
 
         // Check for action parameter
         if (isset($data['action'])) {
@@ -64,8 +62,13 @@ switch ($requestMethod) {
                 echo $response;
             } elseif ($data['action'] === 'delete') {
                 // Delete a book
-                // $response = deleteBookController($data);
-                // echo $response;
+                $book_id = isset($data['bookId']) ? intval($data['bookId']) : null;
+                if ($book_id) {
+                    $response = deleteBookController($book_id);
+                    echo $response;
+                } else {
+                    echo json_encode(["success" => false, "message" => "Invalid book ID."]);
+                }
             } else {
                 echo json_encode(["status" => "error", "message" => "Invalid action."]);
             }

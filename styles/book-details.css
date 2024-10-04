@@ -10,9 +10,15 @@ body {
 #book-details {
     display: flex;
     flex-direction: column;
-    max-width: 1280px;
+    justify-content: center;
+    max-width: 1024px;
     margin: 40px auto;
+    border: 2px solid rgb(216, 0, 216);
+    border-radius: 10px;
+    padding: 48px;
+    
 }
+
 
 .book-content {
     display: flex;
@@ -20,7 +26,15 @@ body {
     text-align: center;
 }
 
+.rating{
+margin-bottom: 32px;
+}
 
+.book-title{
+    font-size: 32px;
+    font-weight: 800;
+    margin: 0px;
+}
 
 .book-content img {
     max-width: 300px;
@@ -40,10 +54,6 @@ body {
     -webkit-box-orient: vertical;  
     overflow: hidden;
 }
-.rating {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-}
 
 .stock-info,
 .purchase-options {
@@ -54,6 +64,17 @@ body {
     margin: 10px;
     padding: 10px 20px;
     font-size: 1em;
+}
+
+.btn {
+    background-color: #f6f6f6;
+    color: #595959;    
+    border-radius: 12px;
+}
+
+.eb{
+    background-color: #965cd3;
+    color: #fff;
 }
 
 #reviews {

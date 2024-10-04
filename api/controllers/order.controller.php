@@ -81,3 +81,12 @@ function getRevenueDataController($days = 30) {
         return json_encode(['success' => false, 'message' => 'No revenue data found']);
     }
 }
+
+function getSalesOverviewController() {
+    $overview = getSalesOverview();
+    if ($overview) {
+        return json_encode(['success' => true, 'overview' => $overview]);
+    } else {
+        return json_encode(['success' => false, 'message' => 'Failed to fetch sales overview']);
+    }
+}

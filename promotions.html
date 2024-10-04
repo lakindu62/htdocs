@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exclusive Book Offers</title>
+
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --primary-color: #3a0ca3;
+            --secondary-color: #f72585;
+            --accent-color: #7c7c7c;
+            --background-color: #f0f7ff;
+            --text-color: #2b2d42;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+
+
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 48px auto;
+            width: 100%;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .offer {
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+      
+
+        .discount {
+            font-size: 3em;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .book-cover {
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin: 20px 0;
+            transition: transform 0.3s ease;
+        }
+
+        .book-cover:hover {
+            transform: scale(1.05);
+        }
+
+        .book-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 15px 0 5px;
+        }
+
+        .author {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            color: var(--text-color);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .timer {
+            font-size: 1.2em;
+            color: var(--primary-color);
+            margin: 15px 0;
+            font-weight: 600;
+        }
+
+        .cta-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1em;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .cta-button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .additional-info {
+            background-color: rgba(76, 201, 240, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+    <div class="container">
+        <div class="offer">
+            <div class="discount">30% OFF</div>
+            <p class="description">All purchases above Rs 2000</p>
+            <img src="https://m.media-amazon.com/images/I/51Zymoq7UnL._SY346_.jpg" alt="Spirit Demon Book Cover" class="book-cover">
+            <h2 class="book-title">Spirit Demon</h2>
+            <p class="author">By Ariel Rose Darius</p>
+            <p class="description">Embark on a thrilling journey into the supernatural with "Spirit Demon". This gripping tale blends elements of horror and fantasy, keeping readers on the edge of their seats.</p>
+            <div class="additional-info">
+                <p><strong>Pages:</strong> 384</p>
+                <p><strong>Genre:</strong> Supernatural Thriller</p>
+                <div class="tags">
+                    <span class="tag">Bestseller</span>
+                    <span class="tag">Page-turner</span>
+                    <span class="tag">Dark Fantasy</span>
+                </div>
+            </div>
+            <div class="timer" id="timer1">Time left: 01:01:01</div>
+            <button class="cta-button">View Product</button>
+        </div>
+
+        <div class="offer">
+            <div class="discount">50% OFF</div>
+            <p class="description">Buy any two Books and get The Mystical Heart book 50% OFF</p>
+            <img src="https://m.media-amazon.com/images/I/51Zymoq7UnL._SY346_.jpg" alt="The Mystical Heart Book Cover" class="book-cover">
+            <h2 class="book-title">The Mystical Heart</h2>
+            <p class="author">By Emma Starlight</p>
+            <p class="description">Dive into a world of magic and romance with "The Mystical Heart". This enchanting novel weaves together love, mystery, and ancient secrets in a tale that will captivate your imagination.</p>
+            <div class="additional-info">
+                <p><strong>Pages:</strong> 412</p>
+                <p><strong>Genre:</strong> Magical Realism</p>
+                <div class="tags">
+                    <span class="tag">Award-winning</span>
+                    <span class="tag">Romantic</span>
+                    <span class="tag">Mystical</span>
+                </div>
+            </div>
+            <div class="timer" id="timer2">Time left: 02:01:01</div>
+            <button class="cta-button">View Product</button>
+        </div>
+    </div>
+    
+    <footer id="footer-container"></footer>
+    <script src="./app/common.js"></script>
+
+    <script>
+        function updateTimer(elementId, hours, minutes, seconds) {
+            const timerElement = document.getElementById(elementId);
+            setInterval(() => {
+                if (seconds > 0) {
+                    seconds--;
+                } else if (minutes > 0) {
+                    minutes--;
+                    seconds = 59;
+                } else if (hours > 0) {
+                    hours--;
+                    minutes = 59;
+                    seconds = 59;
+                }
+                timerElement.textContent = `Time left: ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        updateTimer('timer1', 1, 1, 1);
+        updateTimer('timer2', 2, 1, 1);
+    </script>
+</body>
+</html>

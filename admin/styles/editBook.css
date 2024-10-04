@@ -1,4 +1,156 @@
-/* Specific styles for edit book page */
+/* Edit Book Page Styles */
+
+
+h2 {
+    color: #2c3e50;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 20px;
+    background-color: rgb(240, 240, 240);
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.edit-book-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px;
+    margin: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #f0f0f0;
+    border-radius: 4px;
+
+}
+
+#editBookForm {
+    width: 50%;
+    margin-top: 0px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.book-details {
+    display: flex;
+    gap: 20px;
+    width: 100%;    
+}
+
+.book-metadata {
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.book-metadata > div {
+    width: 48%; /* Slightly less than 50% to account for gap */
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.categories-section,
+.new-category-section {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.new-category-section h3 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.new-category-form-input {
+    display: flex;
+    gap: 10px;
+}
+
+.new-category-form-input input {
+    flex-grow: 1;
+}
+
+.btn-black {
+    background-color: #34495e;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.btn-black:hover {
+    background-color: #2c3e50;
+}
+
+.book-image-container {
+    margin-bottom: 30px;
+}
+
+#bookImage {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin: 0 auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #34495e;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="url"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px; /* Increased padding for better touch targets */
+    margin-bottom: 20px; /* Increased margin for better spacing */
+    border: 1px solid #e2e2e2;
+    border-radius: 4px;
+    font-size: 16px; /* Increased font size for better readability */
+    box-sizing: border-box; /* Ensures padding doesn't affect overall width */
+}
+
+textarea {
+    height: 120px; /* Increased height for description */
+    resize: vertical;
+}
+
+.save-changes-btn {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.save-changes-btn:hover {
+    background-color: #2980b9;
+}
+
+/* Category styles */
 .category-container {
     display: flex;
     flex-wrap: wrap;
@@ -6,65 +158,134 @@
     margin-bottom: 15px;
 }
 
-.category-pill {
-    background-color: #ecf0f1;
-    padding: 5px 10px;
+.category-item {
+    background-color: #e8f4fd;
+    padding: 5px 12px;
     border-radius: 20px;
     display: inline-flex;
     align-items: center;
     font-size: 14px;
 }
 
-.delete-icon {
+.category-item button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     margin-left: 5px;
     cursor: pointer;
-    color: #e74c3c;
-    font-weight: bold;
+    font-size: 12px;
+    transition: background-color 0.3s;
 }
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 500px;
-    border-radius: 5px;
-}
-
-#addCategoryBtn {
-    background-color: #2ecc71;
-    margin-top: 10px;
-}
-
-#addCategoryBtn:hover {
-    background-color: #27ae60;
-}
-
-#saveNewCategory {
-    background-color: #2ecc71;
-}
-
-#saveNewCategory:hover {
-    background-color: #27ae60;
-}
-
-#cancelNewCategory {
-    background-color: #e74c3c;
-}
-
-#cancelNewCategory:hover {
+.category-item button:hover {
     background-color: #c0392b;
+}
+
+/* Category select and add button */
+.category-form-input {
+    display: flex;
+    gap: 10px;
+}
+
+#category {
+    flex-grow: 1;
+    margin: 0px !important;
+}
+
+.btn {
+    background-color: #3498db;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 1024px) {
+    .edit-book-container {
+        flex-direction: column;
+    }
+
+    .book-image-container {
+        margin-bottom: 20px;
+    }
+
+    #bookImage {
+        max-width: 300px;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .edit-book-container {
+        padding: 15px;
+    }
+
+    input[type="text"],
+    input[type="url"],
+    input[type="number"],
+    textarea,
+    select {
+        font-size: 16px;
+        padding: 14px; /* Even larger padding for mobile */
+    }
+
+    .category-form-input {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .new-category-form-input {
+        flex-direction: column;
+    }
+
+    .new-category-form-input input,
+    .new-category-form-input button {
+        width: 100%;
+    }
+}
+
+.existing-categories {
+    margin-top: 20px;
+}
+
+.existing-categories h4 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+#existingCategoriesList {
+    list-style-type: none;
+    padding: 0;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+
+#existingCategoriesList li {
+    padding: 5px 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+#existingCategoriesList li:last-child {
+    border-bottom: none;
 }

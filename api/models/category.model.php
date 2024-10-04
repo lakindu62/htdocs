@@ -62,3 +62,17 @@ function deleteCategory($categoryId)
 
     $stmt->close();
 }
+
+function getAllCategories() {
+    global $conn;
+    $sql = "SELECT category_id, category_name FROM Categories ORDER BY category_name";
+    $result = mysqli_query($conn, $sql);
+
+    $categories = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $categories[] = $row;
+    }
+
+    return $categories;
+}
+

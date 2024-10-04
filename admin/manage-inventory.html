@@ -52,26 +52,25 @@
             <h2>Add New Book</h2>
             <form action="../api/routes/book.route.php" method="post" id="addBookForm" onsubmit="return validateForm()">
                 <input type="hidden" name="action" value="create"> 
-                <label for="title">Title:</label>
-                <input name="title" type="text" id="title" required maxlength="255" pattern=".{1,255}" title="Title must be between 1 and 255 characters long.">
-        
-                <label for="author">Author:</label>
-                <input name="author" type="text" id="author" required maxlength="100" pattern=".{1,100}" title="Author name must be between 1 and 100 characters long.">
-        
-                <label for="description">Description:</label>
-                <textarea name="description" id="description" required maxlength="500" pattern=".{1,500}" title="Description must be between 1 and 500 characters long."></textarea>
-        
-                <label for="imageUrl">Image URL:</label>
-                <input name="imageUrl" type="url" id="imageUrl" required placeholder="https://example.com/image.jpg" title="Please enter a valid URL.">
-        
-                <label for="price">Price:</label>
-                <input name="price" type="number" id="price" required min="0.01" step="0.01" title="Price must be a positive number.">
-        
-                <label for="stock">Stock:</label>
-                <input name="stock" type="number" id="stock" required min="0" title="Stock cannot be negative.">
-        
-                <button type="submit">Add Book</button>
-                <button type="button" id="closeModal">Cancel</button>
+                <input name="title" type="text" id="title" required maxlength="255" placeholder="Title" title="Title must be between 1 and 255 characters long.">
+                <input name="author" type="text" id="author" required maxlength="100" placeholder="Author" title="Author name must be between 1 and 100 characters long.">
+                <textarea name="description" id="description" required maxlength="500" placeholder="Description" title="Description must be between 1 and 500 characters long."></textarea>
+                <input name="imageUrl" type="url" id="imageUrl" required placeholder="Image URL (https://example.com/image.jpg)" title="Please enter a valid URL.">
+                <input name="price" type="number" id="price" required min="0.01" step="0.01" placeholder="Price" title="Price must be a positive number.">
+                <input name="stock" type="number" id="stock" required min="0" placeholder="Stock" title="Stock cannot be negative.">
+                
+                <div class="category-selection">
+                    <select id="categorySelect" multiple>
+                        <option value="" disabled selected>Select categories</option>
+                        <!-- Categories will be populated dynamically -->
+                    </select>
+                    <div id="selectedCategories" class="selected-categories"></div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit">Add Book</button>
+                    <button type="button" id="closeModal">Cancel</button>
+                </div>
             </form>
         </div>
     </div>

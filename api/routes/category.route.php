@@ -5,39 +5,24 @@ $requestMethod = $_SERVER["REQUEST_METHOD"];
 
 switch ($requestMethod) {
     case 'GET':
-        // Get all categories
-        echo getCategories();
+        echo getAllCategoriesController();
         break;
 
     case 'POST':
         $data = $_POST;
-
-
-        // Check for action parameter
-        if (isset($data['action'])) {
-            if ($data['action'] === 'create') {
-                // Create a new category
-                
-                $response = createCategoryController($data);
-                echo $response;
-            } elseif ($data['action'] === 'update') {
-                // Update an existing category
-                $response = updateCategoryController($data);
-                echo $response;
-            } elseif ($data['action'] === 'delete') {
-                // Delete a category
-                $response = deleteCategoryController($data);
-                echo $response;
+        if (isset($data['action']) && $data['action'] === 'create') {
+            if (isset($data['category_name'])) {
+                echo createCategoryController($data['category_name']);
             } else {
-                echo json_encode(["status" => "error", "message" => "Invalid action."]);
+                echo json_encode(["success" => false, "message" => "Category name is required"]);
             }
         } else {
-            echo json_encode(["status" => "error", "message" => "No action specified."]);
+            echo json_encode(["success" => false, "message" => "Invalid action"]);
         }
         break;
 
     default:
-        echo json_encode(["status" => "error", "message" => "Unknown request method."]);
+        echo "Unknown request method.";
         break;
 }
 ?>

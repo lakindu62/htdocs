@@ -20,6 +20,12 @@ document.addEventListener('DOMContentLoaded', function() {
     editBookForm.addEventListener('submit', handleFormSubmit);
     addCategoryBtn.addEventListener('click', addCategory);
 
+    const saveChangesBtn = document.querySelector('.save-changes-btn');
+    saveChangesBtn.addEventListener('click', handleFormSubmit);
+
+    const createCategoryBtn = document.getElementById('createCategoryBtn');
+    createCategoryBtn.addEventListener('click', createNewCategory);
+
     function fetchBookData(bookId) {
         fetch(`../api/routes/book.route.php?book_id=${bookId}&isAdmin=true`)
             .then(response => response.json())
@@ -41,8 +47,19 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(categories => {
                 populateCategorySelect(categories);
+                displayExistingCategories(categories);
             })
             .catch(error => console.error('Error fetching categories:', error));
+    }
+
+    function displayExistingCategories(categories) {
+        const existingCategoriesList = document.getElementById('existingCategoriesList');
+        existingCategoriesList.innerHTML = '';
+        categories.forEach(category => {
+            const li = document.createElement('li');
+            li.textContent = category.category_name;
+            existingCategoriesList.appendChild(li);
+        });
     }
 
     function populateForm(data) {
@@ -53,6 +70,11 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('imageUrl').value = data.imageUrl;
         document.getElementById('price').value = data.price;
         document.getElementById('stock').value = data.stock;
+        
+        // Set the book image
+        const bookImage = document.getElementById('bookImage');
+        bookImage.src = data.imageUrl;
+        bookImage.alt = data.title;
     }
 
     function populateCategorySelect(categories) {
@@ -73,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
             categoryElement.textContent = category.category_name;
             
             const removeBtn = document.createElement('button');
-            removeBtn.textContent = 'Remove';
+            removeBtn.textContent = 'x';
             removeBtn.onclick = () => removeCategory(category.category_id);
             
             categoryElement.appendChild(removeBtn);
@@ -102,21 +124,62 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = new FormData(editBookForm);
         formData.append('action', 'update');
         formData.append('category', JSON.stringify(currentCategories.map(cat => cat.category_id)));
-        console.log(currentCategories);
+        
+        // Add price and stock to formData
+        formData.append('price', document.getElementById('price').value);
+        formData.append('stock', document.getElementById('stock').value);
+
         fetch('../api/routes/book.route.php', {
             method: 'POST',
             body: formData
         })
-        .then(response => response.text())
+        .then(response => response.json())
         .then(data => {
             console.log(data);
             if (data.success) {
-                alert('Book updated successfully');
-                // Optionally redirect or refresh the page
+                showToast('Book updated successfully');
+                
+                // Re-fetch the book data to update the form
+                const bookId = document.getElementById('bookId').value;
+                fetchBookData(bookId);
             } else {
-                alert('Error updating book: ' + data.message);
+                showToast('Error updating book: ' + data.message, 'error');
             }
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            console.error('Error:', error);
+            showToast('An error occurred while updating the book', 'error');
+        });
+    }
+
+    function createNewCategory(e) {
+        e.preventDefault();
+        const newCategoryName = document.getElementById('newCategory').value.trim();
+        
+        if (newCategoryName) {
+            fetch('../api/routes/category.route.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `action=create&category_name=${encodeURIComponent(newCategoryName)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showToast('Category created successfully');
+                    document.getElementById('newCategory').value = ''; // Clear the input
+                    fetchCategories(); // Refresh the category list
+                } else {
+                    showToast('Error creating category: ' + data.message, 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showToast('An error occurred while creating the category', 'error');
+            });
+        } else {
+            showToast('Please enter a category name', 'error');
+        }
     }
 });

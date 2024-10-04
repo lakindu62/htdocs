@@ -17,7 +17,7 @@ async function fetchBooks() {
 
 function renderBookDetails(book) {
     const bookDetailsHtml = `
-        <h1>${book.title}</h1>
+        <h1 class="book-title">${book.title}</h1>
         <div class="rating">
             <span>${book.avg_rating}</span>
             ${renderStars(book.avg_rating)}
@@ -35,12 +35,12 @@ function renderBookDetails(book) {
                 <div class="purchase-options">
                     <span>Purchase</span>
                     <div>
-                        <button onclick="addToCart('${
+                        <button class="btn hc" onclick="addToCart('${
                             book.book_id
                         }', 'hardcopy', ${book.hardcopy_price})">Hard copy ($${(
         parseFloat(book.hardcopy_price) / 100
     ).toFixed(2)})</button>
-                        <button onclick="addToCart('${
+                        <button class="btn eb" onclick="addToCart('${
                             book.book_id
                         }', 'ebook', ${book.ebook_price})">E book ($${(
         parseFloat(book.ebook_price) / 100

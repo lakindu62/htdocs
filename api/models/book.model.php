@@ -303,31 +303,20 @@ ORDER BY Categories.category_name, Books.title
     return $booksByCategory;
 }
 
-function createBook(
-    $title,
-    $author,
-    $stock,
-    $description,
-    $imageUrl,
-    $price
-) {
+function createBook($title, $author, $stock, $description, $imageUrl, $price)
+{
     global $conn;
     $stmt = $conn->prepare("INSERT INTO Books (title, author, description, imageUrl, price, stock) VALUES (?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("ssssdi", $title, $author, $description, $imageUrl, $price, $stock);
 
-    // Execute the statement
     if ($stmt->execute()) {
-        echo "New book added successfully.";
+        $book_id = $stmt->insert_id;
+        $stmt->close();
+        return $book_id;
     } else {
-        echo "Error: " . $stmt->error;
+        $stmt->close();
+        return false;
     }
-
-
-    // Close the statement and connection
-    $stmt->close();
-    $conn->close();
-    header("Location: " . $_SERVER['HTTP_REFERER']);
-    exit();
 }
 
 
@@ -349,6 +338,9 @@ function updateBook($book_id, $title, $author, $description, $imageUrl, $price, 
 
 function updateBookCategories($book_id, $categories)
 {
+    header("X-Debug-Info: " . json_encode($categories));
+
+
 
     global $conn;
 
@@ -423,4 +415,33 @@ function getLowPerformingBooks()
         $books[] = $row;
     }
     return $books;
+}
+
+function deleteBook($book_id) {
+    global $conn;
+    
+    // Start transaction
+    $conn->begin_transaction();
+
+    try {
+        // Delete from Book_Categories
+        $stmt = $conn->prepare("DELETE FROM Book_Categories WHERE book_id = ?");
+        $stmt->bind_param("i", $book_id);
+        $stmt->execute();
+        $stmt->close();
+
+        // Delete from Books
+        $stmt = $conn->prepare("DELETE FROM Books WHERE book_id = ?");
+        $stmt->bind_param("i", $book_id);
+        $stmt->execute();
+        $stmt->close();
+
+        // Commit transaction
+        $conn->commit();
+        return true;
+    } catch (Exception $e) {
+        // Rollback transaction on error
+        $conn->rollback();
+        return false;
+    }
 }
