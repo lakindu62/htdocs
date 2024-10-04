@@ -63,3 +63,21 @@ function getUserOrdersController($user_id) {
         return json_encode(['success' => false, 'message' => 'No orders found']);
     }
 }
+
+function getAllOrdersController() {
+    $orders = getAllOrders();
+    if ($orders) {
+        return json_encode(['success' => true, 'orders' => $orders]);
+    } else {
+        return json_encode(['success' => false, 'message' => 'No orders found']);
+    }
+}
+
+function getRevenueDataController($days = 30) {
+    $revenueData = getRevenueData($days);
+    if ($revenueData) {
+        return json_encode(['success' => true, 'revenueData' => $revenueData]);
+    } else {
+        return json_encode(['success' => false, 'message' => 'No revenue data found']);
+    }
+}

@@ -1,9 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body,
 html {
     margin: 0;
     padding: 0;
     height: 100%;
     overflow: hidden;
+    font-family: 'Roboto', Arial, sans-serif;
 }
 
 .admin-panel {
@@ -11,19 +18,29 @@ html {
     height: 100vh;
 }
 
+
 .main-content {
-    width: 85%;
-    padding: 20px;
+    width: 100%;
     overflow-x: auto;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
     border-radius: 5px;
+}
+
+.panel-title {
+    font-size: 1.7rem;
+}
+
+.panel-content {
+    padding: 20px;
 }
 
 /* Sidebar styles */
 .sidebar {
     width: 250px;
     background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);  
     padding: 20px;
     height: 100vh;
     overflow-y: auto;
@@ -36,21 +53,39 @@ html {
     margin-bottom: 48px;
 }
 
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo-container img {
+    width: 100%;
+}
+
 .sidebar ul {
     list-style-type: none;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding: 0;
+    gap: 12px;
+
+
 }
 
 .sidebar li {
     margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid #ddd;
 }
 
 .sidebar a {
     text-decoration: none;
     color: #333;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-weight: 600;
 }
 
 .sidebar a.active {
@@ -60,18 +95,25 @@ html {
 /* Responsive sidebar styles */
 @media screen and (max-width: 768px) {
     .sidebar {
-        transform: translateX(-250px);
-        transition: transform 0.3s ease-in-out;
         position: fixed;
+        left: -250px;
+        top: 0;
+        bottom: 0;
+        transition: left 0.3s ease-in-out;
+        z-index: 1000;
     }
 
     .sidebar.show {
-        transform: translateX(0);
+        left: 0;
     }
 
-    .main-content{
+    .main-content {
         width: 100%;
+        transition: margin-left 0.3s ease-in-out;
+    }
 
+    .main-content.sidebar-open {
+        margin-left: 24px;
     }
 }
 
@@ -84,14 +126,16 @@ html {
     padding: 10px;
     font-size: 20px;
     cursor: pointer;
-    margin-bottom: 10px;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1001;
 }
 
 @media screen and (max-width: 768px) {
     .menu-btn {
         display: block;
-        top: 32px;
-        right: 36px;
-        z-index: 1000;
     }
 }
+
+/* ... rest of the existing styles ... */

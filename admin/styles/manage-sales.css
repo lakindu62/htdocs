@@ -1,0 +1,192 @@
+.sales-overview {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0rem;
+
+}
+
+
+
+.overview-card {
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    padding: 2rem;
+    width: 33%;
+    text-align: center;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.overview-card h3 {
+    margin-top: 0.9rem;
+    margin-bottom: 0.7rem;
+}
+
+.overview-card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+    .sales-overview {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .overview-card {
+        width: 100%;
+    }
+    
+}
+
+.table-title {
+    margin-top: 3rem;
+    margin-left: 1rem;
+    color: #685a5a;
+
+
+}
+
+.table-container {
+  
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 1rem;
+}
+
+#orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px; /* Adjust this value based on your table's minimum width */
+}
+
+#orders-table th,
+#orders-table td {
+    border-bottom: 1px solid #ddd;
+    padding: 16px 12px;
+    text-align: left;
+}
+
+#orders-table th {
+    background-color: #f2f2f2;
+}
+
+
+
+.status-select {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #e8f0fe; /* Light blue background */
+    color: #333;
+}
+
+.update-btn {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.update-btn:hover {
+    background-color: #45a049;
+}
+
+
+.revenue-graph-title {
+    color: #685a5a;
+}
+
+/* ... existing styles ... */
+
+.revenue-graph-container {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.revenue-graph-container h2 {
+    margin-bottom: 1rem;
+}
+
+.chart-container {
+    position: relative;
+    height: 30vh;
+    width: 100%;
+}
+
+#revenueChart {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Status-specific background colors */
+.status-select.status-pending { background-color: #fff3e0; } /* Light Orange */
+.status-select.status-processing { background-color: #e3f2fd; } /* Light Blue */
+.status-select.status-shipped { background-color: #e8f5e9; } /* Light Green */
+.status-select.status-delivered { background-color: #e8f5e9; } /* Light Green */
+.status-select.status-cancelled { background-color: #ffebee; } /* Light Red */
+
+/* Add these new styles */
+.salespanel-header-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 20px;
+    background-color: rgb(240, 240, 240);
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    font-size: 1.7rem;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+#orderSearch {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    font-size: 14px;
+}
+
+#searchBtn {
+    padding: 8px 12px;
+    background-color: #ac91ca;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+#searchBtn:hover {
+    background-color: #45a049;
+}
+
+/* ... rest of the existing styles ... */
+
+/* Add these new styles */
+#clearSearchBtn {
+    padding: 8px 12px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#clearSearchBtn:hover {
+    background-color: #d32f2f;
+}
+
+/* ... rest of the existing styles ... */

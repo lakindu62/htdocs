@@ -141,3 +141,78 @@ function getUserOrders($user_id) {
 
     return $orders;
 }
+
+
+
+function getAllOrders() {
+    global $conn;
+    $stmt = $conn->prepare("
+        SELECT o.*, u.username, sd.country, sd.city, sd.postal_address, sd.postal_code
+        FROM Orders o
+        JOIN Users u ON o.user_id = u.user_id
+        JOIN Shipping_Details sd ON o.shipping_id = sd.shipping_id
+        ORDER BY o.order_date DESC
+    ");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $orders = $result->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+
+    // Fetch order items for each order
+    foreach ($orders as &$order) {
+        $stmt = $conn->prepare("
+            SELECT oi.*, b.title, b.author, b.price
+            FROM Order_Items oi
+            JOIN Books b ON oi.book_id = b.book_id
+            WHERE oi.order_id = ?
+        ");
+        $stmt->bind_param("i", $order['order_id']);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $order['items'] = $result->fetch_all(MYSQLI_ASSOC);
+    }
+    $stmt->close();
+
+    return $orders;
+}
+
+function getRevenueData() {
+    global $conn;
+    
+    $query = "WITH date_range AS (
+        SELECT DATE(CURDATE() - INTERVAL n DAY) AS date
+        FROM (
+            SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6
+        ) numbers
+    ),
+    daily_sales AS (
+        SELECT DATE(order_date) as sale_date, SUM(total_amount) as total_revenue
+        FROM Orders 
+        WHERE order_date BETWEEN CURDATE() - INTERVAL 6 DAY AND CURDATE()
+        GROUP BY DATE(order_date)
+    )
+    SELECT 
+        dr.date, 
+        COALESCE(ds.total_revenue, 0) as revenue
+    FROM 
+        date_range dr
+    LEFT JOIN 
+        daily_sales ds ON dr.date = ds.sale_date
+    ORDER BY 
+        dr.date";
+    
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    $revenueData = [];
+    while ($row = $result->fetch_assoc()) {
+        $revenueData[] = [
+            'date' => $row['date'],
+            'revenue' => floatval($row['revenue'])
+        ];
+    }
+    
+    $stmt->close();
+    return $revenueData;
+}

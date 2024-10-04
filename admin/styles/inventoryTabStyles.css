@@ -1,13 +1,79 @@
-* {
-    box-sizing: border-box;
-}
-
-
-.admin-panel {
+/* Add these new styles at the beginning of the file */
+.inventorypanel-header-container {
     display: flex;
-    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 20px;
+    background-color: rgb(240, 240, 240);
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
+.panel-title {
+    font-size: 1.7rem;
+}
+
+.search-container {
+    display: flex;
+    align-items: center !important;
+    justify-content: center;    
+}
+
+#bookSearch {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    font-size: 14px;
+    margin: 0px;
+
+}
+
+#searchBtn {
+    padding: 8px 12px;
+    background-color: #ac91ca;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+#searchBtn:hover {
+    background-color: #45a049;
+}
+
+#clearSearchBtn {
+    padding: 8px 12px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#clearSearchBtn:hover {
+    background-color: #d32f2f;
+}
+
+/* Update existing styles */
+.add-book-btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.add-book-btn:hover {
+    background-color: #45a049;
+}
+
+/* ... (keep the rest of the existing styles) ... */
 
 .add-book-btn {
     background-color: #4caf50;
@@ -30,7 +96,7 @@ table {
 
 th,
 td {
-    border: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
@@ -221,5 +287,130 @@ button[type="button"] {
         height: 16px;
         line-height: 16px;
         font-size: 10px;
+    }
+}
+
+/* Analytics styles */
+.analytics-container {
+    display: flex;
+    padding: 20px;
+
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.analytics-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    flex: 1;
+    min-width: 250px;
+}
+
+.analytics-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.analytics-card table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.analytics-card th,
+.analytics-card td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.analytics-card th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* Responsive styles for analytics */
+@media screen and (max-width: 768px) {
+    .analytics-container {
+        flex-direction: column;
+    }
+
+    .analytics-card {
+        min-width: 100%;
+    }
+}
+
+/* Best performing book styles */
+.best-book {
+    background-color: #f0f8ff;
+    border: 1px solid #b0d4ff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.best-book h3 {
+    color: #2c3e50;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+.best-book-content {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.best-book-image {
+    width: 120px;
+    height: 180px;
+    object-fit: cover;
+    margin-right: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.best-book-info {
+    flex-grow: 1;
+}
+
+.best-book-info p {
+    margin: 8px 0;
+    font-size: 1.1rem;
+    color: #34495e;
+}
+
+.best-book-info strong {
+    color: #2980b9;
+    font-size: 1.2rem;
+}
+
+.best-book-stat {
+    display: inline-block;
+    background-color: #e8f4fd;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+/* Responsive styles for best performing book */
+@media screen and (max-width: 768px) {
+    .best-book-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .best-book-image {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .best-book-info p {
+        font-size: 1rem;
     }
 }

@@ -1,209 +1,122 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const editBookForm = document.getElementById("editBookForm");
-    const addCategoryBtn = document.getElementById("addCategoryBtn");
-    const addCategoryModal = document.getElementById("addCategoryModal");
-    const saveNewCategory = document.getElementById("saveNewCategory");
-    const cancelNewCategory = document.getElementById("cancelNewCategory");
-
-    // Load book data
+document.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
-    const bookId = urlParams.get("id");
+    const bookId = urlParams.get('id');
+    const editBookForm = document.getElementById('editBookForm');
+    const categoryContainer = document.getElementById('category-container');
+    const categorySelect = document.getElementById('category');
+    const addCategoryBtn = document.querySelector('.btn');
+
+    let currentCategories = [];
+
+    // Fetch book data and populate form
     if (bookId) {
-        loadBookData(bookId);
+        fetchBookData(bookId);
     }
 
-    
+    // Fetch all categories
+    fetchCategories();
 
+    // Event listeners
+    editBookForm.addEventListener('submit', handleFormSubmit);
+    addCategoryBtn.addEventListener('click', addCategory);
 
-    let currentBookCategories;
-
-    async function loadBookData(bookId) {
-        try {
-            const response = await fetch(
-                `/api/routes/book.route.php?book_id=${bookId}&isAdmin=true`
-            );
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            const bookData = await response.json();
-
-            populateForm(bookData);
-        } catch (error) {
-            console.error("Error loading book data:", error);
-        }
+    function fetchBookData(bookId) {
+        fetch(`../api/routes/book.route.php?book_id=${bookId}&isAdmin=true`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                populateForm(data);
+                console.log(data);
+                currentCategories = data.categories.map(cat => ({
+                    category_id: cat.category_id,
+                    category_name: cat.category_name // Assuming the backend returns category names
+                }));
+                updateCategoryDisplay();
+            })
+            .catch(error => console.error('Error fetching book data:', error));
     }
 
-    function populateForm(bookData) {
-        document.getElementById("bookId").value = bookData.book_id;
-        document.getElementById("title").value = bookData.title;
-        document.getElementById("author").value = bookData.author;
-        document.getElementById("description").value = bookData.description;
-        document.getElementById("imageUrl").value = bookData.imageUrl;
-        document.getElementById("price").value = bookData.price;
-        document.getElementById("stock").value = bookData.stock;
-        loadBookCategories(bookData.categories);
+    function fetchCategories() {
+        fetch('../api/routes/category.route.php')
+            .then(response => response.json())
+            .then(categories => {
+                populateCategorySelect(categories);
+            })
+            .catch(error => console.error('Error fetching categories:', error));
     }
 
-    async function loadBookCategories(categories) {
-        console.log(categories);
-
-        currentBookCategories = categories;
-        getAllCategories();
-
-        populateBookCategories(categories);
-        // try {
-        //     const response = await fetch("/api/routes/category.route.php");
-        //     if (!response.ok) {
-        //         throw new Error(`HTTP error! Status: ${response.status}`);
-        //     }
-        //     const categories = await response.json();
-        //     console.log(categories);
-
-        // } catch (error) {
-        //     console.error("Error loading categories:", error);
-        // }
+    function populateForm(data) {
+        document.getElementById('bookId').value = data.book_id;
+        document.getElementById('title').value = data.title;
+        document.getElementById('author').value = data.author;
+        document.getElementById('description').value = data.description;
+        document.getElementById('imageUrl').value = data.imageUrl;
+        document.getElementById('price').value = data.price;
+        document.getElementById('stock').value = data.stock;
     }
 
-    function populateBookCategories(categories) {
-        const categoryContainer = document.getElementById("category-container");
-        categories.forEach((category) => {
-            const pill = document.createElement("div");
-            pill.className = "category-pill";
-            // pill.dataset.categoryId = category.category_id;
-            pill.innerHTML = `
-                        ${category}
-                        <span class="delete-icon" onclick="deleteCategory(${category})">×</span>
-                    `;
-            categoryContainer.appendChild(pill);
+    function populateCategorySelect(categories) {
+        categorySelect.innerHTML = '<option value="">Select a category</option>';
+        categories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category.category_id;
+            option.textContent = category.category_name;
+            categorySelect.appendChild(option);
         });
     }
 
-    async function getAllCategories() {
-        try {
-            const response = await fetch("/api/routes/category.route.php");
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            const categories = await response.json();
-
-            populateAllCategories(categories);
-        } catch (error) {
-            console.error("Error loading categories:", error);
-        }
-    }
-
-    function populateAllCategories(categories) {
-        const difference = categories.filter(
-            (item) => !currentBookCategories.includes(item.category_name)
-        );
-
-        const allCatSelectContainer = document.getElementById("category");
-        difference.forEach((category) => {
-            const catOption = document.createElement("option");
-            catOption.value = category.category_name;
-            catOption.innerHTML = category.category_name;
-
-            allCatSelectContainer.appendChild(catOption);
+    function updateCategoryDisplay() {
+        categoryContainer.innerHTML = '';
+        currentCategories.forEach(category => {
+            const categoryElement = document.createElement('div');
+            categoryElement.className = 'category-item';
+            categoryElement.textContent = category.category_name;
+            
+            const removeBtn = document.createElement('button');
+            removeBtn.textContent = 'Remove';
+            removeBtn.onclick = () => removeCategory(category.category_id);
+            
+            categoryElement.appendChild(removeBtn);
+            categoryContainer.appendChild(categoryElement);
         });
     }
 
-    //editing a book when details are submitted
-    editBookForm.addEventListener("submit", function (e) {
+    function addCategory(e) {
         e.preventDefault();
-        saveBookChanges();
-    });
-
-    //creating a new category when details are submitted
-    saveNewCategory.addEventListener("click", function () {
-        const newCategoryName =
-            document.getElementById("newCategoryName").value;
-        if (newCategoryName) {
-            createNewCategory(newCategoryName);
+        const selectedCategoryId = categorySelect.value;
+        const selectedCategoryName = categorySelect.options[categorySelect.selectedIndex].text;
+        
+        if (selectedCategoryId && !currentCategories.some(cat => cat.category_id === selectedCategoryId)) {
+            currentCategories.push({ category_id: selectedCategoryId, category_name: selectedCategoryName });
+            updateCategoryDisplay();
         }
-    });
+    }
 
-    //category model control
-    addCategoryBtn.addEventListener("click", function () {
-        addCategoryModal.style.display = "block";
-    });
-    cancelNewCategory.addEventListener("click", function () {
-        addCategoryModal.style.display = "none";
-    });
+    function removeCategory(categoryId) {
+        currentCategories = currentCategories.filter(cat => cat.category_id !== categoryId);
+        updateCategoryDisplay();
+    }
+
+    function handleFormSubmit(e) {
+        e.preventDefault();
+        const formData = new FormData(editBookForm);
+        formData.append('action', 'update');
+        formData.append('category', JSON.stringify(currentCategories.map(cat => cat.category_id)));
+        console.log(currentCategories);
+        fetch('../api/routes/book.route.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data);
+            if (data.success) {
+                alert('Book updated successfully');
+                // Optionally redirect or refresh the page
+            } else {
+                alert('Error updating book: ' + data.message);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
 });
-
-function deleteBookCategory(categoryId) {
-    const pill = document.querySelector(
-        `.category-pill[data-category-id="${categoryId}"]`
-    );
-    if (pill) {
-        pill.remove();
-        // Here you would typically also send a request to your backend to delete the category
-    }
-}
-
-//save the edited changes
-async function saveBookChanges() {
-    const formData = new FormData(document.getElementById("editBookForm"));
-    const requestData = {
-        ...formData,
-        action: "update",
-    };
-
-    const body = new URLSearchParams(requestData).toString();
-    try {
-        const response = await fetch("/api/routes/book.route.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body,
-        });
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const result = await response.json();
-        if (result.success) {
-            alert("Book updated successfully!");
-        } else {
-            alert("Error updating book: " + result.message);
-        }
-    } catch (error) {
-        console.error("Error saving book changes:", error);
-        alert("Error saving book changes. Please try again.");
-    }
-}
-
-async function createNewCategory(category_name) {
-    const requestData = {
-        category_name,
-        action: "create",
-    };
-
-    const body = new URLSearchParams(requestData).toString();
-
-    try {
-        const response = await fetch("/api/routes/category.route.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body,
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const result = await response.json();
-
-        if (result.status === "success") {
-            alert("New category created successfully!");
-            document.getElementById("addCategoryModal").style.display = "none";
-            loadCategories();
-        } else {
-            alert("Error creating category: " + result.message);
-        }
-    } catch (error) {
-        console.error("Error creating new category:", error);
-        alert("Error creating new category. Please try again.");
-    }
-}

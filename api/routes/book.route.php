@@ -6,6 +6,11 @@ $requestMethod = $_SERVER["REQUEST_METHOD"];
 switch ($requestMethod) {
     case 'GET':
 
+        if (isset($_GET['action']) && $_GET['action'] === 'analytics') {
+            $json = getAnalyticsController();
+            echo $json;
+            break;
+        }
 
         //get books for the admin dashboard
         $isAdmin = isset($_GET['isAdmin']) ? $_GET['isAdmin'] : null;
@@ -39,11 +44,13 @@ switch ($requestMethod) {
         break;
 
 
+       
+
     case 'POST':
 
         $data = $_POST;
 
-        var_dump($data);
+
 
         // Check for action parameter
         if (isset($data['action'])) {

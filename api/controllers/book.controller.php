@@ -19,12 +19,11 @@ function getAdminSingleBookDataController($book_id)
     $bookData = getAdminSingleBookData($book_id);
 
     if ($bookData) {
-        if (!empty($bookData["categories"])) {
-
-            $bookData["categories"] = explode(',',    $bookData["categories"]);
-        } else {
-            $bookData["categories"] = [];
-        }
+        // Fetch book categories
+        $bookCategories = getBookCategories($book_id);
+        
+        // Add categories to the book data
+        $bookData['categories'] = $bookCategories;
         return json_encode($bookData);
     } else {
         return json_encode(['Error' => "No book found"]);
@@ -38,17 +37,17 @@ function getAdminSingleBookDataController($book_id)
 
 function getBookDetailsController($book_id)
 {
-    $reviews = getReviews( $book_id);
-    $ratingCounts = getRatingCounts( $book_id);
-    $bookDetails = getBookDetails( $book_id);
-    
+    $reviews = getReviews($book_id);
+    $ratingCounts = getRatingCounts($book_id);
+    $bookDetails = getBookDetails($book_id);
+
     // Prepare the response data
     $response = [
         'book' => $bookDetails,
         'reviews' => $reviews,
         'ratingCounts' => $ratingCounts
     ];
-    
+
     return json_encode($response);
 }
 
@@ -56,8 +55,8 @@ function getBookDetailsController($book_id)
 
 function getBooksByCategory($user_id)
 {
-    $booksByCategory = getAllBooksWithCategories($user_id); 
-    header('Content-Type: application/json'); 
+    $booksByCategory = getAllBooksWithCategories($user_id);
+    header('Content-Type: application/json');
     return json_encode($booksByCategory); //  JSON encoded data
 }
 
@@ -75,14 +74,7 @@ function createBookController()
     $price = $_POST['price'];
     $stock = $_POST['stock'];
 
-    var_dump(
-        $title,
-        $author,
-        $stock,
-        $description,
-        $imageUrl,
-        $price
-    );
+
 
 
 
@@ -102,23 +94,44 @@ function createBookController()
 
 function updateBookController($data)
 {
-    $book_id = $data['book_id'];
+    $book_id = $data['bookId'];
     $title = $data['title'];
     $author = $data['author'];
     $description = $data['description'];
     $imageUrl = $data['imageUrl'];
     $price = $data['price'];
     $stock = $data['stock'];
-    $categories = $data['categories']; // This should be an array of category IDs
 
+    // var_dump($book_id, $title, $author, $description, $imageUrl, $price, $stock);
+
+    // var_dump($data['category']);
+    // var_dump($data);
+    $categories = json_decode($data['category'], true);
     // Update the book details
     $updateBookResponse = updateBook($book_id, $title, $author, $description, $imageUrl, $price, $stock);
 
     if ($updateBookResponse) {
-        // Update the book categories
-        updateBookCategories($book_id, $categories);
+        // Only update categories if they're provided
+        if (isset( $categories) && is_array( $categories)) {
+            updateBookCategories($book_id,  $categories);
+        }
         return json_encode(["success" => true, "message" => "Book updated successfully."]);
     } else {
         return json_encode(["success" => false, "message" => "Error updating book."]);
     }
+}
+
+function getAnalyticsController()
+{
+    $bestPerformingBook = getBestPerformingBook();
+    $lowStockCount = getLowStockCount();
+    $lowPerformingBooks = getLowPerformingBooks();
+
+    $response = [
+        'bestPerformingBook' => $bestPerformingBook,
+        'lowStockCount' => $lowStockCount,
+        'lowPerformingBooks' => $lowPerformingBooks
+    ];
+
+    return json_encode($response);
 }

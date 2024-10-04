@@ -183,6 +183,27 @@ function getBookDetails($book_id)
 
 
 
+function getBookCategories($book_id) {
+    global $conn;
+    
+    $sql = "SELECT c.category_id, c.category_name
+            FROM Categories c
+            JOIN Book_Categories bc ON c.category_id = bc.category_id
+            WHERE bc.book_id = ?";
+    
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $book_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    $categories = [];
+    while ($row = $result->fetch_assoc()) {
+        $categories[] = $row;
+    }
+    
+    $stmt->close();
+    return $categories;
+}
 
 
 
@@ -203,7 +224,6 @@ function getAdminSingleBookData($book_id)
     b.price,
     b.stock,
     b.author,
-    GROUP_CONCAT(DISTINCT c.category_name) AS categories,
     AVG(r.rating) AS average_rating,
     COUNT(r.review_id) AS review_count,
     SUM(oi.quantity) AS total_sold,
@@ -329,6 +349,7 @@ function updateBook($book_id, $title, $author, $description, $imageUrl, $price, 
 
 function updateBookCategories($book_id, $categories)
 {
+
     global $conn;
 
     // First, delete existing categories for this book
@@ -344,4 +365,62 @@ function updateBookCategories($book_id, $categories)
         $insertStmt->execute();
     }
     $insertStmt->close();
+}
+
+function getBestPerformingBook()
+{
+    global $conn;
+    $sql = "SELECT 
+                b.book_id, 
+                b.title, 
+                b.author, 
+                b.imageUrl,
+                SUM(oi.quantity) AS total_sold,
+                SUM(oi.quantity * b.price) AS total_revenue
+            FROM 
+                Books b
+            JOIN 
+                Order_Items oi ON b.book_id = oi.book_id
+            GROUP BY 
+                b.book_id
+            ORDER BY 
+                total_revenue DESC
+            LIMIT 1";
+
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_assoc($result);
+}
+
+function getLowStockCount()
+{
+    global $conn;
+    $sql = "SELECT COUNT(*) AS low_stock_count FROM Books WHERE stock < 10";
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_assoc($result)['low_stock_count'];
+}
+
+function getLowPerformingBooks()
+{
+    global $conn;
+    $sql = "SELECT 
+                b.book_id, 
+                b.title, 
+                b.stock,
+                COALESCE(SUM(oi.quantity), 0) AS total_sold
+            FROM 
+                Books b
+            LEFT JOIN 
+                Order_Items oi ON b.book_id = oi.book_id
+            GROUP BY 
+                b.book_id
+            ORDER BY 
+                total_sold ASC
+            LIMIT 5";
+
+    $result = mysqli_query($conn, $sql);
+    $books = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $books[] = $row;
+    }
+    return $books;
 }

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Sales - Admin Dashboard</title>
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/utils.css">
+    <link rel="stylesheet" href="styles/manage-sales.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-panel">
+        <!-- Sidebar will be inserted here by JavaScript -->
+        <div id="sidebar" class="sidebar">
+        </div>
+
+        <main class="main-content">
+            <button id="menuBtn" class="menu-btn">☰</button>
+            <div class="salespanel-header-container">
+                <h1 class="panel-title">Manage Sales</h1>
+                <div class="search-container">
+                    <input type="tlxt" id="orderSearch" placeholder="Search orders...">
+                    <button id="searchBtn"><i class="fas fa-search"></i></button>
+                    <button id="clearSearchBtn" style="display: none;">Clear Search</button>
+                </div>
+            </div>
+            
+            <div class="panel-content">
+                <div class="sales-overview">
+                    <div class="overview-card">
+                        <i class="fas fa-dollar-sign"></i>
+                        <h3>Total Sales</h3>
+                        <p id="total-sales">$0</p>
+                    </div>
+                    <div class="overview-card">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Total Orders</h3>
+                        <p id="total-orders">0</p>
+                    </div>
+                    <div class="overview-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Average Order Value</h3>
+                        <p id="avg-order-value">$0</p>
+                    </div>
+                </div>
+                <!-- Add this new section for the revenue graph -->
+                <div class="revenue-graph-container">
+                    <h2 class="revenue-graph-title">Revenue Over Time</h2>
+                    <div class="chart-container">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+                <h2 class="table-title">Order Management</h2>
+                <div class="table-container">
+                    <table id="orders-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Date</th>
+                                <th>Total Amount</th>
+                                <th>Payment Method</th>
+                                <th>Shipping Address</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Order rows will be inserted here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Chart.js library before your manage-sales.js script -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app/sidebar.js"></script>
+    <script src="app/manage-sales.js"></script>
+</body>
+</html>

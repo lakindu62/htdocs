@@ -11,8 +11,13 @@ switch ($requestMethod) {
         } elseif (isset($_GET['user_id'])) {
             $user_id = $_GET['user_id'];
             echo getUserOrdersController($user_id);
+        } elseif (isset($_GET['all_orders'])) {
+            echo getAllOrdersController();
+        } elseif (isset($_GET['revenue_data'])) {
+            $days = isset($_GET['days']) ? intval($_GET['days']) : 30;
+            echo getRevenueDataController($days);
         } else {
-            echo json_encode(['error' => 'Order ID or User ID is required']);
+            echo json_encode(['error' => 'Invalid GET request']);
         }
         break;
 

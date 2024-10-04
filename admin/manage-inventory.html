@@ -6,31 +6,45 @@
     <title>Admin Panel - Inventory Management</title>
     <link rel="stylesheet" href="./styles/inventoryTabStyles.css">
     <link rel="stylesheet" href="./styles/common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="admin-panel">
         <div id="sidebar" class="sidebar">
         </div>
-        <div class="main-content">
+        <main class="main-content">
             <button id="menuBtn" class="menu-btn">☰</button>
-            <h2>Inventory Management</h2>
-            <button id="addBookBtn" class="add-book-btn">Add Book</button>
-            <div class="table-container">
-                <table id="bookTable">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Title</th>
-                            <th>Author</th>
-                            <th>Price</th>
-                            <th>Stock</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="bookList"></tbody>
-                </table>
+            <div class="inventorypanel-header-container">
+                <h1 class="panel-title">Inventory Management</h1>
+                <div class="search-container">
+                    <input type="text" id="bookSearch" placeholder="Search books...">
+                    <button id="searchBtn"><i class="fas fa-search"></i></button>
+                    <button id="clearSearchBtn" style="display: none;">Clear Search</button>
+                </div>
             </div>
-        </div>
+            
+            <!-- Add the analytics container here -->
+            <div id="analyticsContainer" class="analytics-container"></div>
+            
+            <div class="panel-content">
+                <button id="addBookBtn" class="add-book-btn">Add Book</button>
+                <div class="table-container">
+                    <table id="bookTable">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookList"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
     </div>
 
     <div id="addBookModal" class="modal">
